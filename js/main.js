@@ -1,4 +1,5 @@
 //constants
+
 const MIN_AVATAR_NUM_URL = 1;
 const MAX_AVATAR_NUM_URL = 10;
 const AVATAR_PAD_START = 2;
@@ -6,6 +7,7 @@ const LAT_MIN = 35.65000;
 const LAT_MAX = 35.70000;
 const LNG_MIN = 139.70000;
 const LNG_MAX = 139.80000;
+const SIMILAR_OBJECTS_COUNT = 10;
 
 const TITLE_ARRAY = [
   'Уютное гнездышко',
@@ -45,7 +47,7 @@ const getRandomNumber = (min, max) => (Math.random() * (max - min + 1) + min);
 
 const getRandomArrayElement = (array) => (array[Math.floor(Math.random() * array.length)]);
 
-function getArray(features) {
+const getArray = (features) => {
   const maxLength = features.length;
   const arrayLength = Math.floor(getRandomNumber(1, maxLength));
   const newArray = [];
@@ -59,24 +61,22 @@ function getArray(features) {
     }
   }
   return newArray;
-}
+};
+
+//---------------------------------------------------------------------------------------------------------------//
 
 const createObject = () => {
-  const locLat = getRandomNumber(LAT_MIN, LAT_MAX);
-  const locLng = getRandomNumber(LNG_MIN, LNG_MAX);
-  const locLatLng = {
-    lat: locLat,
-    lng: locLng,
-  };
+  const locLat = getRandomNumber(LAT_MIN, LAT_MAX).toFixed(5);
+  const locLng = getRandomNumber(LNG_MIN, LNG_MAX).toFixed(5);
 
-  const newObject = {
+  return {
     author: {
       avatar: `img/avatars/user${String(Math.floor(getRandomNumber(MIN_AVATAR_NUM_URL, MAX_AVATAR_NUM_URL))).padStart(AVATAR_PAD_START, '0')}.png`
     },
 
     offer: {
       title: getRandomArrayElement(TITLE_ARRAY),
-      address: `${locLatLng.lat}, ${locLatLng.lng}`,
+      address: `${locLat}, ${locLng}`,
       price: Math.floor(getRandomNumber(1000, 50000)),
       type: getRandomArrayElement(TYPE_ARRAY),
       rooms: Math.floor(getRandomNumber(1, 10)),
@@ -88,9 +88,12 @@ const createObject = () => {
       photos: getArray(PHOTOS)
     },
 
-    locaton: locLatLng,
+    location: {
+      lat: locLat,
+      lng: locLng,
+    }
   };
-  return newObject;
 };
 
-console.log(createObject());
+const createObjectsArray = Array.from({ length: SIMILAR_OBJECTS_COUNT }, createObject);
+createObjectsArray();
