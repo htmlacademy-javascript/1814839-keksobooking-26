@@ -64,19 +64,19 @@ function getArray(features) {
 const createObject = () => {
   const locLat = getRandomNumber(LAT_MIN, LAT_MAX);
   const locLng = getRandomNumber(LNG_MIN, LNG_MAX);
-  const locaton = {
+  const locLatLng = {
     lat: locLat,
     lng: locLng,
   };
 
-  console.log({
+  const newObject = {
     author: {
       avatar: `img/avatars/user${String(Math.floor(getRandomNumber(MIN_AVATAR_NUM_URL, MAX_AVATAR_NUM_URL))).padStart(AVATAR_PAD_START, '0')}.png`
     },
 
     offer: {
       title: getRandomArrayElement(TITLE_ARRAY),
-      address: `${locaton.lat}, ${locaton.lng}`,
+      address: `${locLatLng.lat}, ${locLatLng.lng}`,
       price: Math.floor(getRandomNumber(1000, 50000)),
       type: getRandomArrayElement(TYPE_ARRAY),
       rooms: Math.floor(getRandomNumber(1, 10)),
@@ -88,8 +88,9 @@ const createObject = () => {
       photos: getArray(PHOTOS)
     },
 
-    locaton
-  });
+    locaton: locLatLng,
+  };
+  return newObject;
 };
 
-createObject();
+console.log(createObject());
