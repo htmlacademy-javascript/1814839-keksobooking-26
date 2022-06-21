@@ -2,6 +2,10 @@
 const MIN_AVATAR_NUM_URL = 1;
 const MAX_AVATAR_NUM_URL = 10;
 const AVATAR_PAD_START = 2;
+const LAT_MIN = 35.65000;
+const LAT_MAX = 35.70000;
+const LNG_MIN = 139.70000;
+const LNG_MAX = 139.80000;
 
 const TITLE_ARRAY = [
   'Уютное гнездышко',
@@ -37,7 +41,7 @@ const PHOTOS = [
 
 //functions
 
-const getRandomNumber = (min, max) => (Math.random() * (max - min + 1) + min); //тут min + 1, т.к. я включила в диапазон возможных чисел мин и макс
+const getRandomNumber = (min, max) => (Math.random() * (max - min + 1) + min);
 
 const getRandomArrayElement = (array) => (array[Math.floor(Math.random() * array.length)]);
 
@@ -58,6 +62,13 @@ function getArray(features) {
 }
 
 const createObject = () => {
+  const locLat = getRandomNumber(LAT_MIN, LAT_MAX);
+  const locLng = getRandomNumber(LNG_MIN, LNG_MAX);
+  const locaton = {
+    lat: locLat,
+    lng: locLng,
+  };
+
   console.log({
     author: {
       avatar: `img/avatars/user${String(Math.floor(getRandomNumber(MIN_AVATAR_NUM_URL, MAX_AVATAR_NUM_URL))).padStart(AVATAR_PAD_START, '0')}.png`
@@ -65,7 +76,7 @@ const createObject = () => {
 
     offer: {
       title: getRandomArrayElement(TITLE_ARRAY),
-      address: 'адрес предложения. Для простоты пусть пока составляется из географических координат по маске {{location.lat}}, {{location.lng}}.',
+      address: `${locaton.lat}, ${locaton.lng}`,
       price: Math.floor(getRandomNumber(1000, 50000)),
       type: getRandomArrayElement(TYPE_ARRAY),
       rooms: Math.floor(getRandomNumber(1, 10)),
@@ -77,10 +88,7 @@ const createObject = () => {
       photos: getArray(PHOTOS)
     },
 
-    locaton: {
-      lat: 'число с плавающей точкой — широта, случайное значение от 35.65000 до 35.70000.',
-      lng: 'число с плавающей точкой — долгота, случайное значение от 139.70000 до 139.80000'
-    }
+    locaton
   });
 };
 
