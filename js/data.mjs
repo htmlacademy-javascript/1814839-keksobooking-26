@@ -1,4 +1,4 @@
-//constants
+import { getRandomNumber, getRandomArrayElement, getArray } from './util.mjs';
 
 const MIN_AVATAR_NUM_URL = 1;
 const MAX_AVATAR_NUM_URL = 10;
@@ -41,28 +41,6 @@ const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg.'
 ];
 
-//functions
-
-const getRandomNumber = (min, max) => (Math.random() * (max - min + 1) + min);
-
-const getRandomArrayElement = (array) => (array[Math.floor(Math.random() * array.length)]);
-
-const getArray = (features) => {
-  const maxLength = features.length;
-  const arrayLength = Math.floor(getRandomNumber(1, maxLength));
-  const newArray = [];
-
-  while (newArray.length < arrayLength) {
-    const index = Math.floor(getRandomNumber(1, maxLength - 1));
-    const element = features[index];
-
-    if (!newArray.includes(element)) {
-      newArray.push(element);
-    }
-  }
-  return newArray;
-};
-
 //---------------------------------------------------------------------------------------------------------------//
 
 const createObject = () => {
@@ -95,5 +73,6 @@ const createObject = () => {
   };
 };
 
-const createObjectsArray = Array.from({ length: SIMILAR_OBJECTS_COUNT }, createObject);
-createObjectsArray();
+const createObjectsArray = () => Array.from({ length: SIMILAR_OBJECTS_COUNT }, createObject);
+
+export { createObjectsArray };
