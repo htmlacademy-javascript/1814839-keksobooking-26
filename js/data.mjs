@@ -1,4 +1,4 @@
-import { getRandomNumber, getRandomArrayElement, getArray } from './util.js';
+import { getRandomNumber, getRandomArrayElement, getArray } from './util.mjs';
 
 const MIN_AVATAR_NUM_URL = 1;
 const MAX_AVATAR_NUM_URL = 10;
