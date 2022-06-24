@@ -17,4 +17,14 @@ const getArray = (features) => {
 
 const getRandomArrayElement = (array) => (array[Math.floor(Math.random() * array.length)]);
 
-export { getRandomNumber, getRandomArrayElement, getArray };
+const isObjectDefinded = (object) => object !== undefined && object !== null && object !== '';
+
+const assignDataToTextContent = (element, selector, data, needed) => {
+  if (needed) {
+    element.querySelector(selector).textContent = data;
+  } else {
+    element.querySelector(selector).remove();
+  }
+};
+
+export { getRandomNumber, getRandomArrayElement, getArray, isObjectDefinded, assignDataToTextContent };

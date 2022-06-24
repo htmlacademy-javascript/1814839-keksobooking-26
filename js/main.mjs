@@ -1,4 +1,4 @@
 import { createObjectsArray } from './data.mjs';
-import './generate-elements.mjs';
+import './generate-cards.mjs';
 
 createObjectsArray();
