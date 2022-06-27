@@ -27,4 +27,4 @@ const assignDataToTextContent = (element, selector, data, needed) => {
   }
 };
 
-export { getRandomNumber, getRandomArrayElement, getArray, isObjectDefinded, assignDataToTextContent };
+export { getRandomNumber, getRandomArrayElement, getArray, isObjectDefinded, assignDataToTextContent, };
