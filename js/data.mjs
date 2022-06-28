@@ -35,10 +35,12 @@ const DESCRIPTIONS = [
   'Massa tempor nec feugiat nisl pretium fusce id velit.',
   'Egestas integer eget aliquet nibh praesent tristique magna.',
   'Eu feugiat pretium nibh ipsum consequat nisl.'];
+
+const PHOTO_ADRESS = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/';
 const PHOTOS = [
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
+  `${PHOTO_ADRESS}duonguyen-8LrGtIxxa4w.jpg`,
+  `${PHOTO_ADRESS}brandon-hoogenboom-SNxQGWxZQi0.jpg`,
+  `${PHOTO_ADRESS}claire-rendall-b6kAwr1i0Iw.jpg`
 ];
 
 //---------------------------------------------------------------------------------------------------------------//
