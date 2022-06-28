@@ -17,6 +17,8 @@ const offerType = {
 
 const cardsArray = createObjectsArray();
 
+const cardsFragment = document.createDocumentFragment();
+
 cardsArray.forEach((cardElement) => {
   const card = cardTemplate.cloneNode(true);
 
@@ -100,6 +102,8 @@ cardsArray.forEach((cardElement) => {
     card.querySelector('.popup__photos').remove();
   }
 
-  mapCanvas.appendChild(card);
+  cardsFragment.append(card);
 });
+
+mapCanvas.append(cardsFragment);
 
