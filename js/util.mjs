@@ -26,14 +26,12 @@ const getRandomElement = (array) => {
   return Error('Массив не должен быть пустым!');
 };
 
-const boolean = (object) => object !== undefined && object !== null && object !== '';
-
-const controlAppendElement = (element, selector, data, needed) => {
-  if (needed) {
-    element.querySelector(selector).textContent = data;
+const controlAppendElement = (params) => {
+  if (params.needed) {
+    params.element.querySelector(params.selector).textContent = params.data;
   } else {
-    element.querySelector(selector).remove();
+    params.element.querySelector(params.selector).remove();
   }
 };
 
-export { getRandomNumber, getRandomElement, appendRandomCountElements, boolean, controlAppendElement, getInteger, addPadStart };
+export { getRandomNumber, getRandomElement, appendRandomCountElements, controlAppendElement, getInteger, addPadStart };
