@@ -1,4 +1,4 @@
-import { getRandomNumber, getRandomArrayElement, getArray } from './util.mjs';
+import { getRandomNumber, getRandomElement, appendRandomCountElements, getInteger, addPadStart } from './util.mjs';
 
 const MIN_AVATAR_NUM_URL = 1;
 const MAX_AVATAR_NUM_URL = 10;
@@ -45,27 +45,29 @@ const PHOTOS = [
 
 //---------------------------------------------------------------------------------------------------------------//
 
+const getAvatarUrl = () => `img/avatars/user${addPadStart(AVATAR_PAD_START, getInteger(MIN_AVATAR_NUM_URL, MAX_AVATAR_NUM_URL))}.png`;
+
 const createObject = () => {
   const locLat = getRandomNumber(LAT_MIN, LAT_MAX).toFixed(5);
   const locLng = getRandomNumber(LNG_MIN, LNG_MAX).toFixed(5);
 
   return {
     author: {
-      avatar: `img/avatars/user${String(Math.floor(getRandomNumber(MIN_AVATAR_NUM_URL, MAX_AVATAR_NUM_URL))).padStart(AVATAR_PAD_START, '0')}.png`
+      avatar: getAvatarUrl(),
     },
 
     offer: {
-      title: getRandomArrayElement(TITLE_ARRAY),
+      title: getRandomElement(TITLE_ARRAY),
       address: `${locLat}, ${locLng}`,
       price: Math.floor(getRandomNumber(1000, 50000)),
-      type: getRandomArrayElement(TYPE_ARRAY),
+      type: getRandomElement(TYPE_ARRAY),
       rooms: Math.floor(getRandomNumber(1, 10)),
       guests: Math.floor(getRandomNumber(1, 10)),
-      checkin: getRandomArrayElement(CHECK_IN_OUT_ARRAY),
-      checkout: getRandomArrayElement(CHECK_IN_OUT_ARRAY),
-      features: getArray(FEATURES),
-      description: getRandomArrayElement(DESCRIPTIONS),
-      photos: getArray(PHOTOS)
+      checkin: getRandomElement(CHECK_IN_OUT_ARRAY),
+      checkout: getRandomElement(CHECK_IN_OUT_ARRAY),
+      features: appendRandomCountElements(FEATURES),
+      description: getRandomElement(DESCRIPTIONS),
+      photos: appendRandomCountElements(PHOTOS)
     },
 
     location: {

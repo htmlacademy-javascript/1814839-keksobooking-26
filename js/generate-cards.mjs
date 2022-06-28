@@ -1,5 +1,5 @@
 import { createObjectsArray } from './data.mjs';
-import { isObjectDefinded, assignDataToTextContent } from './util.mjs';
+import { boolean, controlAppendElement } from './util.mjs';
 
 const mapCanvas = document.querySelector('#map-canvas');
 
@@ -20,63 +20,63 @@ const cardsArray = createObjectsArray();
 cardsArray.forEach((cardElement) => {
   const card = cardTemplate.cloneNode(true);
 
-  assignDataToTextContent(
+  controlAppendElement(
     card,
     '.popup__title',
     cardElement.offer.title,
-    isObjectDefinded(cardElement.offer.title),
+    boolean(cardElement.offer.title),
   );
 
-  assignDataToTextContent(
+  controlAppendElement(
     card,
     '.popup__text--address',
     cardElement.offer.address,
-    isObjectDefinded(cardElement.offer.address),
+    boolean(cardElement.offer.address),
   );
 
-  assignDataToTextContent(
+  controlAppendElement(
     card,
     '.popup__text--price',
     `${cardElement.offer.price} ₽/ночь`,
-    isObjectDefinded(cardElement.offer.price),
+    boolean(cardElement.offer.price),
   );
 
-  assignDataToTextContent(
+  controlAppendElement(
     card,
     '.popup__type',
     offerType[cardElement.offer.type],
-    isObjectDefinded(cardElement.offer.type),
+    boolean(cardElement.offer.type),
   );
 
-  assignDataToTextContent(
+  controlAppendElement(
     card,
     '.popup__text--capacity',
     `${cardElement.offer.rooms} комнаты для ${cardElement.offer.guests} гостей`,
-    isObjectDefinded(cardElement.offer.rooms) && isObjectDefinded(cardElement.offer.guests),
+    boolean(cardElement.offer.rooms) && boolean(cardElement.offer.guests),
   );
 
-  assignDataToTextContent(
+  controlAppendElement(
     card,
     '.popup__text--time',
     `Заезд после ${cardElement.offer.checkin}, выезд до ${cardElement.offer.checkout}`,
-    isObjectDefinded(cardElement.offer.checkin) && isObjectDefinded(cardElement.offer.checkout),
+    boolean(cardElement.offer.checkin) && boolean(cardElement.offer.checkout),
   );
 
-  assignDataToTextContent(
+  controlAppendElement(
     card,
     '.popup__description',
     cardElement.offer.description,
-    isObjectDefinded(cardElement.offer.description),
+    boolean(cardElement.offer.description),
   );
 
-  if (isObjectDefinded(cardElement.author.avatar)) {
+  if (boolean(cardElement.author.avatar)) {
     card.querySelector('.popup__avatar').src = cardElement.author.avatar;
   } else {
     card.querySelector('.popup__avatar').remove();
   }
 
   card.querySelector('.popup__features').innerHTML = '';
-  if (isObjectDefinded(cardElement.offer.features)) {
+  if (boolean(cardElement.offer.features)) {
     cardElement.offer.features.forEach((feature) => {
       const li = document.createElement('li');
       li.classList.add('popup__feature', `popup__feature--${feature}`);
@@ -87,7 +87,7 @@ cardsArray.forEach((cardElement) => {
   }
 
   card.querySelector('.popup__photos').innerHTML = '';
-  if (isObjectDefinded(cardElement.offer.photos)) {
+  if (boolean(cardElement.offer.photos)) {
     cardElement.offer.photos.forEach((photo) => {
       const img = document.createElement('img');
       img.classList.add('popup__photo');
@@ -102,3 +102,4 @@ cardsArray.forEach((cardElement) => {
 
   mapCanvas.appendChild(card);
 });
+

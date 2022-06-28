@@ -8,18 +8,27 @@ const shuffleArray = (array) => {
   return array;
 };
 
-const getArray = (features) => {
-  const maxLength = features.length;
+const appendRandomCountElements = (array) => {
+  const maxLength = array.length;
   const arrayLength = Math.floor(getRandomNumber(1, maxLength));
 
-  return shuffleArray(features).slice(0, arrayLength);
+  return shuffleArray(array).slice(0, arrayLength);
 };
 
-const getRandomArrayElement = (array) => (array[Math.floor(Math.random() * array.length)]);
+const getInteger = (min, max) => Math.floor(getRandomNumber(min, max));
 
-const isObjectDefinded = (object) => object !== undefined && object !== null && object !== '';
+const addPadStart = (zeroes, number) => String(number).padStart(zeroes, '0');
 
-const assignDataToTextContent = (element, selector, data, needed) => {
+const getRandomElement = (array) => {
+  if (array !== undefined && array !== null && array.length > 0) {
+    return array[Math.floor(Math.random() * array.length)];
+  }
+  return Error('Массив не должен быть пустым!');
+};
+
+const boolean = (object) => object !== undefined && object !== null && object !== '';
+
+const controlAppendElement = (element, selector, data, needed) => {
   if (needed) {
     element.querySelector(selector).textContent = data;
   } else {
@@ -27,4 +36,4 @@ const assignDataToTextContent = (element, selector, data, needed) => {
   }
 };
 
-export { getRandomNumber, getRandomArrayElement, getArray, isObjectDefinded, assignDataToTextContent, };
+export { getRandomNumber, getRandomElement, appendRandomCountElements, boolean, controlAppendElement, getInteger, addPadStart };
