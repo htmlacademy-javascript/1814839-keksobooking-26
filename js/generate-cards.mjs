@@ -3,7 +3,7 @@ import { boolean, controlAppendElement } from './util.mjs';
 
 const mapCanvas = document.querySelector('#map-canvas');
 
-const cardTemplate = document.querySelector('#card')
+const popup = document.querySelector('#card')
   .content
   .querySelector('.popup');
 
@@ -15,71 +15,71 @@ const offerType = {
   hotel: 'Отель',
 };
 
-const cardsArray = createObjectsArray();
+const popupsArray = createObjectsArray();
 
-const cardsFragment = document.createDocumentFragment();
+const popupsFragment = document.createDocumentFragment();
 
-cardsArray.forEach((cardElement) => {
-  const card = cardTemplate.cloneNode(true);
+popupsArray.forEach((popupElement) => {
+  const card = popup.cloneNode(true);
 
   controlAppendElement(
     card,
     '.popup__title',
-    cardElement.offer.title,
-    boolean(cardElement.offer.title),
+    popupElement.offer.title,
+    boolean(popupElement.offer.title),
   );
 
   controlAppendElement(
     card,
     '.popup__text--address',
-    cardElement.offer.address,
-    boolean(cardElement.offer.address),
+    popupElement.offer.address,
+    boolean(popupElement.offer.address),
   );
 
   controlAppendElement(
     card,
     '.popup__text--price',
-    `${cardElement.offer.price} ₽/ночь`,
-    boolean(cardElement.offer.price),
+    `${popupElement.offer.price} ₽/ночь`,
+    boolean(popupElement.offer.price),
   );
 
   controlAppendElement(
     card,
     '.popup__type',
-    offerType[cardElement.offer.type],
-    boolean(cardElement.offer.type),
+    offerType[popupElement.offer.type],
+    boolean(popupElement.offer.type),
   );
 
   controlAppendElement(
     card,
     '.popup__text--capacity',
-    `${cardElement.offer.rooms} комнаты для ${cardElement.offer.guests} гостей`,
-    boolean(cardElement.offer.rooms) && boolean(cardElement.offer.guests),
+    `${popupElement.offer.rooms} комнаты для ${popupElement.offer.guests} гостей`,
+    boolean(popupElement.offer.rooms) && boolean(popupElement.offer.guests),
   );
 
   controlAppendElement(
     card,
     '.popup__text--time',
-    `Заезд после ${cardElement.offer.checkin}, выезд до ${cardElement.offer.checkout}`,
-    boolean(cardElement.offer.checkin) && boolean(cardElement.offer.checkout),
+    `Заезд после ${popupElement.offer.checkin}, выезд до ${popupElement.offer.checkout}`,
+    boolean(popupElement.offer.checkin) && boolean(popupElement.offer.checkout),
   );
 
   controlAppendElement(
     card,
     '.popup__description',
-    cardElement.offer.description,
-    boolean(cardElement.offer.description),
+    popupElement.offer.description,
+    boolean(popupElement.offer.description),
   );
 
-  if (boolean(cardElement.author.avatar)) {
-    card.querySelector('.popup__avatar').src = cardElement.author.avatar;
+  if (boolean(popupElement.author.avatar)) {
+    card.querySelector('.popup__avatar').src = popupElement.author.avatar;
   } else {
     card.querySelector('.popup__avatar').remove();
   }
 
   card.querySelector('.popup__features').innerHTML = '';
-  if (boolean(cardElement.offer.features)) {
-    cardElement.offer.features.forEach((feature) => {
+  if (boolean(popupElement.offer.features)) {
+    popupElement.offer.features.forEach((feature) => {
       const li = document.createElement('li');
       li.classList.add('popup__feature', `popup__feature--${feature}`);
       card.querySelector('.popup__features').appendChild(li);
@@ -89,8 +89,8 @@ cardsArray.forEach((cardElement) => {
   }
 
   card.querySelector('.popup__photos').innerHTML = '';
-  if (boolean(cardElement.offer.photos)) {
-    cardElement.offer.photos.forEach((photo) => {
+  if (boolean(popupElement.offer.photos)) {
+    popupElement.offer.photos.forEach((photo) => {
       const img = document.createElement('img');
       img.classList.add('popup__photo');
       img.src = photo;
@@ -102,8 +102,8 @@ cardsArray.forEach((cardElement) => {
     card.querySelector('.popup__photos').remove();
   }
 
-  cardsFragment.append(card);
+  popupsFragment.append(card);
 });
 
-mapCanvas.append(cardsFragment);
+mapCanvas.append(popupsFragment);
 
