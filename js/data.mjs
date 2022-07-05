@@ -47,7 +47,7 @@ const PHOTOS = [
 
 const getAvatarUrl = () => {
   const randomInteger = getInteger(MIN_AVATAR_NUM_URL, MAX_AVATAR_NUM_URL);
-  const imagePostfix = addPadStart(AVATAR_PAD_START, randomInteger);
+  const imagePostfix = addPadStart(AVATAR_PAD_START, randomInteger, '0');
   return `img/avatars/user${imagePostfix}.png`;
 };
 

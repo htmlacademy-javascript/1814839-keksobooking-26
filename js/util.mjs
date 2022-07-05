@@ -17,7 +17,8 @@ const appendRandomCountElements = (array) => {
 
 const getInteger = (min, max) => Math.floor(getRandomNumber(min, max));
 
-const addPadStart = (zeroes, number) => String(number).padStart(zeroes, '0');
+const addPadStart = (amount, string, number) => String(string).padStart(amount, number);
+//здесь сделано без передачи объекта параметров, потому что, на мой взгляд, так читаемее
 
 const getRandomElement = (array) => {
   if (array) {
