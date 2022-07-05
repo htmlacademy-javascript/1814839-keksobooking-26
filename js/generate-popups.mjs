@@ -1,5 +1,5 @@
 import { createObjectsArray } from './data.mjs';
-import { controlAppendElement } from './util.mjs';
+import { controlAppendElement, createPhotoElement, createListElement } from './util.mjs';
 
 const mapCanvas = document.querySelector('#map-canvas');
 
@@ -94,8 +94,9 @@ popupsArray.forEach((popupElement) => {
   popupTemplate.querySelector('.popup__features').innerHTML = '';
   if (popupElement.offer.features) {
     popupElement.offer.features.forEach((feature) => {
-      const li = document.createElement('li');
-      li.classList.add('popup__feature', `popup__feature--${feature}`);
+
+      const li = createListElement(['popup__feature', `popup__feature--${feature}`]);
+
       popupTemplate.querySelector('.popup__features').appendChild(li);
     });
   } else {
@@ -105,11 +106,14 @@ popupsArray.forEach((popupElement) => {
   popupTemplate.querySelector('.popup__photos').innerHTML = '';
   if (popupElement.offer.photos) {
     popupElement.offer.photos.forEach((photo) => {
-      const img = document.createElement('img');
-      img.classList.add('popup__photo');
-      img.src = photo;
-      img.width = 45;
-      img.height = 40;
+      const img = createPhotoElement(
+        {
+          className: ['popup__photo'],
+          src: photo,
+          width: 45,
+          height: 40
+        }
+      );
       popupTemplate.querySelector('.popup__photos').appendChild(img);
     });
   } else {

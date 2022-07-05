@@ -34,4 +34,23 @@ const controlAppendElement = (params) => {
   }
 };
 
-export { getRandomNumber, getRandomElement, appendRandomCountElements, controlAppendElement, getInteger, addPadStart };
+const createPhotoElement = (params) => {
+  const img = document.createElement('img');
+  for (let i = 0; i < params.className.length; i++) {
+    img.classList.add(params.className[i]);
+  }
+  img.src = params.src;
+  img.width = params.width;
+  img.height = params.height;
+
+  return img;
+};
+
+const createListElement = (params) => {
+  const li = document.createElement('li');
+  for (let i = 0; i < params.length; i++) {
+    li.classList.add(params[i]);
+  }
+  return li;
+};
+export { getRandomNumber, getRandomElement, appendRandomCountElements, controlAppendElement, getInteger, addPadStart, createPhotoElement, createListElement };
