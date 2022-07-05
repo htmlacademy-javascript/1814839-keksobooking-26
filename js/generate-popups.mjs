@@ -26,8 +26,7 @@ popupsArray.forEach((popupElement) => {
     {
       element: popupTemplate,
       selector: '.popup__title',
-      data: popupElement.offer.title,
-      needed: Boolean(popupElement.offer.title)
+      data: popupElement.offer.title
     }
   );
 
@@ -35,8 +34,7 @@ popupsArray.forEach((popupElement) => {
     {
       element: popupTemplate,
       selector: '.popup__text--address',
-      data: popupElement.offer.address,
-      needed: Boolean(popupElement.offer.address)
+      data: popupElement.offer.address
     }
   );
 
@@ -44,8 +42,7 @@ popupsArray.forEach((popupElement) => {
     {
       element: popupTemplate,
       selector: '.popup__text--price',
-      data: `${popupElement.offer.price} ₽/ночь`,
-      needed: Boolean(popupElement.offer.price)
+      data: `${popupElement.offer.price} ₽/ночь`
     }
   );
 
@@ -53,8 +50,7 @@ popupsArray.forEach((popupElement) => {
     {
       element: popupTemplate,
       selector: '.popup__type',
-      data: offerType[popupElement.offer.type],
-      needed: Boolean(popupElement.offer.type)
+      data: offerType[popupElement.offer.type]
     }
   );
 
@@ -62,8 +58,7 @@ popupsArray.forEach((popupElement) => {
     {
       element: popupTemplate,
       selector: '.popup__text--capacity',
-      data: `${popupElement.offer.rooms} комнаты для ${popupElement.offer.guests} гостей`,
-      needed: Boolean(popupElement.offer.rooms) && Boolean(popupElement.offer.guests),
+      data: `${popupElement.offer.rooms} комнаты для ${popupElement.offer.guests} гостей`
     }
   );
 
@@ -72,7 +67,6 @@ popupsArray.forEach((popupElement) => {
       element: popupTemplate,
       selector: '.popup__text--time',
       data: `Заезд после ${popupElement.offer.checkin}, выезд до ${popupElement.offer.checkout}`,
-      needed: Boolean(popupElement.offer.checkin) && Boolean(popupElement.offer.checkout),
     }
   );
 
@@ -80,8 +74,7 @@ popupsArray.forEach((popupElement) => {
     {
       element: popupTemplate,
       selector: '.popup__description',
-      data: popupElement.offer.description,
-      needed: Boolean(popupElement.offer.description)
+      data: popupElement.offer.description
     }
   );
 

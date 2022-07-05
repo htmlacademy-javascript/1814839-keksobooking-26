@@ -45,7 +45,11 @@ const PHOTOS = [
 
 //---------------------------------------------------------------------------------------------------------------//
 
-const getAvatarUrl = () => `img/avatars/user${addPadStart(AVATAR_PAD_START, getInteger(MIN_AVATAR_NUM_URL, MAX_AVATAR_NUM_URL))}.png`;
+const getAvatarUrl = () => {
+  const randomInteger = getInteger(MIN_AVATAR_NUM_URL, MAX_AVATAR_NUM_URL);
+  const imagePostfix = addPadStart(AVATAR_PAD_START, randomInteger);
+  return `img/avatars/user${imagePostfix}.png`;
+};
 
 const createObject = () => {
   const locLat = getRandomNumber(LAT_MIN, LAT_MAX).toFixed(5);

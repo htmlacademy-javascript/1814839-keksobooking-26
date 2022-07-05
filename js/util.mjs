@@ -27,7 +27,7 @@ const getRandomElement = (array) => {
 };
 
 const controlAppendElement = (params) => {
-  if (params.needed) {
+  if (params.data) {
     params.element.querySelector(params.selector).textContent = params.data;
   } else {
     params.element.querySelector(params.selector).remove();
