@@ -20,7 +20,7 @@ const getInteger = (min, max) => Math.floor(getRandomNumber(min, max));
 const addPadStart = (zeroes, number) => String(number).padStart(zeroes, '0');
 
 const getRandomElement = (array) => {
-  if (array !== undefined && array !== null && array.length > 0) {
+  if (array) {
     return array[Math.floor(Math.random() * array.length)];
   }
   return Error('Массив не должен быть пустым!');
