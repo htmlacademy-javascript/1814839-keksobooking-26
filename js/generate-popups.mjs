@@ -98,6 +98,7 @@ popupsArray.forEach((popupElement) => {
 
   popupTemplate.querySelector('.popup__photos').innerHTML = '';
   if (popupElement.offer.photos) {
+    const photosFragment = document.createDocumentFragment();
     popupElement.offer.photos.forEach((photo) => {
       const img = createPhotoElement(
         {
@@ -107,8 +108,9 @@ popupsArray.forEach((popupElement) => {
           height: 40
         }
       );
-      popupTemplate.querySelector('.popup__photos').appendChild(img);
+      photosFragment.append(img);
     });
+    popupTemplate.querySelector('.popup__photos').appendChild(photosFragment);
   } else {
     popupTemplate.querySelector('.popup__photos').remove();
   }

@@ -21,14 +21,14 @@ const addPadStart = (amount, string, number) => String(string).padStart(amount, 
 //здесь сделано без передачи объекта параметров, потому что, на мой взгляд, так читаемее
 
 const getRandomElement = (array) => {
-  if (array && array.length > 0) {
+  if (array.length > 0) {
     return array[Math.floor(Math.random() * array.length)];
   }
   return Error('Массив не должен быть пустым!');
 };
 
 const controlAppendElement = (params) => {
-  const [element, selector, data] = [params.element, params.selector, params.data];
+  const { element, selector, data } = params;
   if (data) {
     element.querySelector(selector).textContent = data;
   } else {
