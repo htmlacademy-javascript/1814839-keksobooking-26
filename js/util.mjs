@@ -8,23 +8,47 @@ const shuffleArray = (array) => {
   return array;
 };
 
-const getArray = (features) => {
-  const maxLength = features.length;
+const appendRandomCountElements = (array) => {
+  const maxLength = array.length;
   const arrayLength = Math.floor(getRandomNumber(1, maxLength));
 
-  return shuffleArray(features).slice(0, arrayLength);
+  return shuffleArray(array).slice(0, arrayLength);
 };
 
-const getRandomArrayElement = (array) => (array[Math.floor(Math.random() * array.length)]);
+const getInteger = (min, max) => Math.floor(getRandomNumber(min, max));
 
-const isObjectDefinded = (object) => object !== undefined && object !== null && object !== '';
+const addPadStart = (amount, string, number) => String(string).padStart(amount, number);
+//здесь сделано без передачи объекта параметров, потому что, на мой взгляд, так читаемее
 
-const assignDataToTextContent = (element, selector, data, needed) => {
-  if (needed) {
+const getRandomElement = (array) => {
+  if (array.length > 0) {
+    return array[Math.floor(Math.random() * array.length)];
+  }
+  return Error('Массив не должен быть пустым!');
+};
+
+const controlAppendElement = (params) => {
+  const { element, selector, data } = params;
+  if (data) {
     element.querySelector(selector).textContent = data;
   } else {
     element.querySelector(selector).remove();
   }
 };
 
-export { getRandomNumber, getRandomArrayElement, getArray, isObjectDefinded, assignDataToTextContent };
+const createPhotoElement = (params) => {
+  const img = document.createElement('img');
+  img.classList.add(...params.className);
+  img.src = params.src;
+  img.width = params.width;
+  img.height = params.height;
+
+  return img;
+};
+
+const createListElement = (params) => {
+  const li = document.createElement('li');
+  li.classList.add(...params);
+  return li;
+};
+export { getRandomNumber, getRandomElement, appendRandomCountElements, controlAppendElement, getInteger, addPadStart, createPhotoElement, createListElement };

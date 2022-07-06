@@ -1,4 +1,4 @@
-import { getRandomNumber, getRandomArrayElement, getArray } from './util.mjs';
+import { getRandomNumber, getRandomElement, appendRandomCountElements, getInteger, addPadStart } from './util.mjs';
 
 const MIN_AVATAR_NUM_URL = 1;
 const MAX_AVATAR_NUM_URL = 10;
@@ -35,13 +35,21 @@ const DESCRIPTIONS = [
   'Massa tempor nec feugiat nisl pretium fusce id velit.',
   'Egestas integer eget aliquet nibh praesent tristique magna.',
   'Eu feugiat pretium nibh ipsum consequat nisl.'];
+
+const PHOTO_ADRESS = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/';
 const PHOTOS = [
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
+  `${PHOTO_ADRESS}duonguyen-8LrGtIxxa4w.jpg`,
+  `${PHOTO_ADRESS}brandon-hoogenboom-SNxQGWxZQi0.jpg`,
+  `${PHOTO_ADRESS}claire-rendall-b6kAwr1i0Iw.jpg`
 ];
 
 //---------------------------------------------------------------------------------------------------------------//
+
+const getAvatarUrl = () => {
+  const randomInteger = getInteger(MIN_AVATAR_NUM_URL, MAX_AVATAR_NUM_URL);
+  const imagePostfix = addPadStart(AVATAR_PAD_START, randomInteger, '0');
+  return `img/avatars/user${imagePostfix}.png`;
+};
 
 const createObject = () => {
   const locLat = getRandomNumber(LAT_MIN, LAT_MAX).toFixed(5);
@@ -49,21 +57,21 @@ const createObject = () => {
 
   return {
     author: {
-      avatar: `img/avatars/user${String(Math.floor(getRandomNumber(MIN_AVATAR_NUM_URL, MAX_AVATAR_NUM_URL))).padStart(AVATAR_PAD_START, '0')}.png`
+      avatar: getAvatarUrl(),
     },
 
     offer: {
-      title: getRandomArrayElement(TITLE_ARRAY),
+      title: getRandomElement(TITLE_ARRAY),
       address: `${locLat}, ${locLng}`,
       price: Math.floor(getRandomNumber(1000, 50000)),
-      type: getRandomArrayElement(TYPE_ARRAY),
+      type: getRandomElement(TYPE_ARRAY),
       rooms: Math.floor(getRandomNumber(1, 10)),
       guests: Math.floor(getRandomNumber(1, 10)),
-      checkin: getRandomArrayElement(CHECK_IN_OUT_ARRAY),
-      checkout: getRandomArrayElement(CHECK_IN_OUT_ARRAY),
-      features: getArray(FEATURES),
-      description: getRandomArrayElement(DESCRIPTIONS),
-      photos: getArray(PHOTOS)
+      checkin: getRandomElement(CHECK_IN_OUT_ARRAY),
+      checkout: getRandomElement(CHECK_IN_OUT_ARRAY),
+      features: appendRandomCountElements(FEATURES),
+      description: getRandomElement(DESCRIPTIONS),
+      photos: appendRandomCountElements(PHOTOS)
     },
 
     location: {
