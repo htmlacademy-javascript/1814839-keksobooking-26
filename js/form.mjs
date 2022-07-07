@@ -40,13 +40,7 @@ const titlePristine = new Pristine(formOfAdvert,
 
 formOfAdvert.addEventListener('submit', (evt) => {
   evt.preventDefault();
-
-  const isValid = titlePristine.validate();
-  if (isValid) {
-    console.log('Можно отправлять');
-  } else {
-    console.log('Нельзя отправлять');
-  }
+  titlePristine.validate();
 });
 
 export { disableForm, enableForm };
