@@ -97,13 +97,18 @@
           </div>
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--wide">
-          <label class="ad-form__label" for="title">Заголовок объявления</label>
-          <input id="title" name="title" type="text" placeholder="Милая, уютная квартирка в центре Токио" minlength="30"
-            maxlength="100" required>
+          <label class="ad-form__label" for="title">Заголовок объявления
+            <input id="title" name="title" type="text" placeholder="Милая, уютная квартирка в центре Токио"
+              minlength="30" maxlength="100" data-pristine-required-message="Обязательное поле"
+              data-pristine-minlength-message="Минимальная длина 30 символов"
+              data-pristine-maxlength-message="Максимальная длина 100 символов" required>
+          </label>
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--wide">
-          <label class="ad-form__label" for="address">Адрес (координаты)</label>
-          <input id="address" name="address" type="text" readonly required>
+          <label class="ad-form__label" for="address">Адрес (координаты)
+            <input id="address" name="address" type="text" data-pristine-required-message="Обязательное поле" readonly
+              required>
+          </label>
         </fieldset>
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="type">Тип жилья</label>
@@ -116,9 +121,13 @@
           </select>
         </fieldset>
         <fieldset class="ad-form__element">
-          <label class="ad-form__label" for="price">Цена за ночь, руб.</label>
-          <input id="price" name="price" type="number" placeholder="5000" max="100000" required>
-          <div class="ad-form__slider"></div>
+          <label class="ad-form__label" for="price">Цена за ночь, руб.
+            <input id="price" name="price" type="number" placeholder="5000" max="100000" min="5000"
+              data-pristine-required-message="Обязательное поле"
+              data-pristine-min-message="Минимальная стоимость - 5000"
+              data-pristine-max-message="Максимальная стоимость - 100000" required>
+            <div class="ad-form__slider"></div>
+          </label>
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--time">
           <label class="ad-form__label" for="timein">Время заезда и выезда</label>

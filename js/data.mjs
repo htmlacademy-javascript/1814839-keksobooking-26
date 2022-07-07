@@ -55,7 +55,6 @@ const getAvatarUrl = () => {
 const createRealtyDescriptionCard = () => {
   const locLat = getRandomNonInteger(LAT_MIN, LAT_MAX).toFixed(5);
   const locLng = getRandomNonInteger(LNG_MIN, LNG_MAX).toFixed(5);
-
   return {
     author: {
       avatar: getAvatarUrl(),

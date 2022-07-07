@@ -31,16 +31,22 @@ const enableForm = () => {
 
 // валидация формы
 
-const pristine = new Pristine(formOfAdvert);
+const titlePristine = new Pristine(formOfAdvert,
+  {
+    classTo: 'ad-form__label',
+    errorTextParent: 'ad-form__label',
+    errorTextClass: 'ad-form__label--error'
+  });
 
 formOfAdvert.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
-  const isValid = pristine.validate();
+  const isValid = titlePristine.validate();
   if (isValid) {
-    // console.log('Можно отправлять');
+    console.log('Можно отправлять');
+  } else {
+    console.log('Нельзя отправлять');
   }
-  // console.log('Нельзя отправлять');
 });
 
 export { disableForm, enableForm };
