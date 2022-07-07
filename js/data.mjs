@@ -9,7 +9,7 @@ const LNG_MIN = 139.70000;
 const LNG_MAX = 139.80000;
 const SIMILAR_OBJECTS_COUNT = 10;
 
-const TITLE_ARRAY = [
+const TITLES_OF_REALTY = [
   'Уютное гнездышко',
   'В историческом центре города',
   'Фамильная резиденция',
@@ -21,8 +21,8 @@ const TITLE_ARRAY = [
   'Здесь жил Тед Банди',
   'Больше не могу ничего придумать'
 ];
-const TYPE_ARRAY = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
-const CHECK_IN_OUT_ARRAY = ['12:00', '13:00', '14:00'];
+const TYPES_OF_REALTY = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
+const CHECK_IN_OUT_TIME = ['12:00', '13:00', '14:00'];
 const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 const DESCRIPTIONS = [
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -51,7 +51,7 @@ const getAvatarUrl = () => {
   return `img/avatars/user${imagePostfix}.png`;
 };
 
-const createObject = () => {
+const createApartment = () => {
   const locLat = getRandomNumber(LAT_MIN, LAT_MAX).toFixed(5);
   const locLng = getRandomNumber(LNG_MIN, LNG_MAX).toFixed(5);
 
@@ -59,21 +59,21 @@ const createObject = () => {
     author: {
       avatar: getAvatarUrl(),
     },
-
     offer: {
-      title: getRandomElement(TITLE_ARRAY),
+      title: getRandomElement(TITLES_OF_REALTY
+      ),
       address: `${locLat}, ${locLng}`,
       price: Math.floor(getRandomNumber(1000, 50000)),
-      type: getRandomElement(TYPE_ARRAY),
+      type: getRandomElement(TYPES_OF_REALTY
+      ),
       rooms: Math.floor(getRandomNumber(1, 10)),
       guests: Math.floor(getRandomNumber(1, 10)),
-      checkin: getRandomElement(CHECK_IN_OUT_ARRAY),
-      checkout: getRandomElement(CHECK_IN_OUT_ARRAY),
+      checkin: getRandomElement(CHECK_IN_OUT_TIME),
+      checkout: getRandomElement(CHECK_IN_OUT_TIME),
       features: appendRandomCountElements(FEATURES),
       description: getRandomElement(DESCRIPTIONS),
       photos: appendRandomCountElements(PHOTOS)
     },
-
     location: {
       lat: locLat,
       lng: locLng,
@@ -81,6 +81,6 @@ const createObject = () => {
   };
 };
 
-const createObjectsArray = () => Array.from({ length: SIMILAR_OBJECTS_COUNT }, createObject);
+const createApartments = () => Array.from({ length: SIMILAR_OBJECTS_COUNT }, createApartment);
 
-export { createObjectsArray };
+export { createApartments };
