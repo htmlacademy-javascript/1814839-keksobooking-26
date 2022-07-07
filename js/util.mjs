@@ -24,15 +24,6 @@ const getRandomElement = (array) => {
   return Error('Массив не должен быть пустым!');
 };
 
-const controlDataAppend = (params) => {
-  const { element, selector, data } = params;
-  if (data) {
-    element.querySelector(selector).textContent = data;
-  } else {
-    element.querySelector(selector).remove();
-  }
-};
-
 const createPhotoElement = (params) => {
   const { className, src, width, height } = params;
   const img = document.createElement('img');
@@ -49,4 +40,4 @@ const createListElement = (params) => {
   return li;
 };
 
-export { getRandomNonInteger, getRandomElement, appendRandomCountElements, controlDataAppend, getRandomInteger, addPadStart, createPhotoElement, createListElement };
+export { getRandomNonInteger, getRandomElement, appendRandomCountElements, getRandomInteger, addPadStart, createPhotoElement, createListElement };

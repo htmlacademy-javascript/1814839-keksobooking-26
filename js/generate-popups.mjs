@@ -1,13 +1,11 @@
 import { createRealtyDescriptionCards } from './data.mjs';
-import { controlDataAppend, createPhotoElement, createListElement } from './util.mjs';
+import { createPhotoElement, createListElement } from './util.mjs';
 
 const mapCanvas = document.querySelector('#map-canvas');
-
 const realtyCardTemplate = document.querySelector('#popupTemplate')
   .content
   .querySelector('.popup');
 
-//realty type
 const realtyType = {
   palace: 'Дворец',
   flat: 'Квартира',
@@ -19,6 +17,59 @@ const realtyType = {
 const realtyCards = createRealtyDescriptionCards();
 
 const realtyCardTemplateFragment = document.createDocumentFragment();
+
+const controlDataAppend = (params) => {
+  const { element, selector, data } = params;
+  if (data) {
+    element.querySelector(selector).textContent = data;
+  } else {
+    element.querySelector(selector).remove();
+  }
+};
+
+const controlAvatarAppend = (params) => {
+  const { url, selector, element } = params;
+  if (url) {
+    element.querySelector(selector).src = url;
+  } else {
+    element.querySelector(selector).remove();
+  }
+};
+
+const controlFeaturesAppend = (params) => {
+  const { data, element } = params;
+  if (data) {
+    data.forEach((feature) => {
+
+      const li = createListElement(['popup__feature', `popup__feature--${feature}`]);
+
+      element.querySelector('.popup__features').appendChild(li);
+    });
+  } else {
+    element.querySelector('.popup__features').remove();
+  }
+};
+
+const controlPhotosAppend = (params) => {
+  const { data, element } = params;
+  if (data) {
+    const photosFragment = document.createDocumentFragment();
+    data.forEach((photo) => {
+      const img = createPhotoElement(
+        {
+          className: ['popup__photo'],
+          src: photo,
+          width: 45,
+          height: 40
+        }
+      );
+      photosFragment.append(img);
+    });
+    element.querySelector('.popup__photos').appendChild(photosFragment);
+  } else {
+    element.querySelector('.popup__photos').remove();
+  }
+};
 
 realtyCards.forEach((card) => {
   const newCardTemplate = realtyCardTemplate.cloneNode(true);
@@ -79,43 +130,27 @@ realtyCards.forEach((card) => {
     }
   );
 
-  //переписать на другую функцию, передать в нее вот это вот все, чтобы было просто прям тут создать, побить на логические части
-  if (card.author.avatar) {
-    newCardTemplate.querySelector('.popup__avatar').src = card.author.avatar;
-  } else {
-    newCardTemplate.querySelector('.popup__avatar').remove();
-  }
+  controlAvatarAppend(
+    {
+      selector: '.popup__avatar',
+      element: newCardTemplate,
+      url: card.author.avatar
+    }
+  );
 
   newCardTemplate.querySelector('.popup__features').innerHTML = '';
-  if (card.offer.features) {
-    card.offer.features.forEach((feature) => {
-
-      const li = createListElement(['popup__feature', `popup__feature--${feature}`]);
-
-      newCardTemplate.querySelector('.popup__features').appendChild(li);
-    });
-  } else {
-    newCardTemplate.querySelector('.popup__features').remove();
-  }
+  controlFeaturesAppend(
+    {
+      data: card.offer.features,
+      element: newCardTemplate
+    }
+  );
 
   newCardTemplate.querySelector('.popup__photos').innerHTML = '';
-  if (card.offer.photos) {
-    const photosFragment = document.createDocumentFragment();
-    card.offer.photos.forEach((photo) => {
-      const img = createPhotoElement(
-        {
-          className: ['popup__photo'],
-          src: photo,
-          width: 45,
-          height: 40
-        }
-      );
-      photosFragment.append(img);
-    });
-    newCardTemplate.querySelector('.popup__photos').appendChild(photosFragment);
-  } else {
-    newCardTemplate.querySelector('.popup__photos').remove();
-  }
+  controlPhotosAppend({
+    data: card.offer.photos,
+    element: newCardTemplate
+  });
 
   realtyCardTemplateFragment.append(newCardTemplate);
 });
