@@ -1,31 +1,47 @@
-const adForm = document.querySelector('.ad-form');
-const adFormFieldsets = adForm.querySelectorAll('fieldset');
+const advertAddForm = document.querySelector('.ad-form');
+const advertAddFormFields = advertAddForm.querySelectorAll('fieldset');
 
-const mapFilters = document.querySelector('.map__filters');
-const mapFiltersFieldsets = mapFilters.querySelectorAll('fieldset');
+const filtersOfAdverts = document.querySelector('.map__filters');
+const filtersOfAdvertsFields = filtersOfAdverts.querySelectorAll('fieldset');
 
-const disableElements = (elementsArray, node) => {
-  elementsArray.forEach((element) => {
+// активация и деактивация формы
+
+const disableFormField = (formFields, form) => {
+  formFields.forEach((element) => {
     element.disabled = true;
   });
-  node.classList.add('ad-form--disabled');
+  form.classList.add('ad-form--disabled');
 };
 
-const enableElements = (elementsArray, node) => {
-  elementsArray.forEach((element) => {
+const enableElements = (formFields, form) => {
+  formFields.forEach((element) => {
     element.disabled = false;
   });
-  node.classList.remove('ad-form--disabled');
+  form.classList.remove('ad-form--disabled');
 };
 
-const inactivateAll = () => {
-  disableElements(adFormFieldsets, adForm);
-  disableElements(mapFiltersFieldsets, mapFilters);
+const disableForm = () => {
+  disableFormField(advertAddFormFields, advertAddForm);
+  disableFormField(filtersOfAdvertsFields, filtersOfAdverts);
 };
 
-const activateAll = () => {
-  enableElements(adFormFieldsets, adForm);
-  enableElements(mapFiltersFieldsets, mapFilters);
+const enableForm = () => {
+  enableElements(advertAddFormFields, advertAddForm);
+  enableElements(filtersOfAdvertsFields, filtersOfAdverts);
 };
 
-export { inactivateAll, activateAll };
+// валидация формы
+
+const pristine = new Pristine(advertAddForm);
+
+advertAddForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  const isValid = pristine.validate();
+  if (isValid) {
+    // console.log('Можно отправлять');
+  }
+  // console.log('Ошибки в форме');
+});
+
+export { disableForm, enableForm };
