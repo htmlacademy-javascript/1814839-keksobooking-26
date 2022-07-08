@@ -6,6 +6,8 @@ const roomsField = formOfAdvert.querySelector('[name="rooms"]');
 const capacityField = formOfAdvert.querySelector('[name="capacity"]');
 const realtyTypeField = formOfAdvert.querySelector('[name="type"]');
 const realtyPriceField = formOfAdvert.querySelector('[name="price"]');
+const checkInTimeField = formOfAdvert.querySelector('[name="timein"]');
+const checkOutTimeField = formOfAdvert.querySelector('[name="timeout"]');
 
 const realtyMinPrice = {
   bungalow: 0,
@@ -49,6 +51,16 @@ const enableForm = () => {
 };
 
 // валидация формы
+const switchCheckInOutTime = () => {
+  checkInTimeField.addEventListener('change', () => {
+    checkOutTimeField.value = checkInTimeField.value;
+  });
+  checkOutTimeField.addEventListener('change', () => {
+    checkInTimeField.value = checkOutTimeField.value;
+  });
+};
+
+switchCheckInOutTime();
 
 const pristine = new Pristine(formOfAdvert,
   {
@@ -66,6 +78,7 @@ const getCapacityErrorMessage = () => `Размещение в ${roomsField.valu
 const validateRealtyPrice = () => {
   const unit = realtyTypeField.value;
   const minCost = realtyMinPrice[unit];
+  realtyPriceField.placeholder = minCost;
   return realtyPriceField.value >= minCost;
 };
 
@@ -73,6 +86,7 @@ const getRealtyPriceErrorMessage = () => {
   const unit = realtyTypeField.value;
   return `Минимальная цена за этот тип размещения - ${realtyMinPrice[unit]} руб.`;
 };
+
 
 formOfAdvert.addEventListener('submit', (evt) => {
   evt.preventDefault();
