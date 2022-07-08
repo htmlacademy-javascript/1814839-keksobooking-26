@@ -4,6 +4,16 @@ const filtersOfAdverts = document.querySelector('.map__filters');
 const filtersOfAdvertsFields = filtersOfAdverts.querySelectorAll('fieldset');
 const roomsField = formOfAdvert.querySelector('[name="rooms"]');
 const capacityField = formOfAdvert.querySelector('[name="capacity"]');
+const realtyTypeField = formOfAdvert.querySelector('[name="type"]');
+const realtyPriceField = formOfAdvert.querySelector('[name="price"]');
+
+const realtyMinPrice = {
+  bungalow: 0,
+  flat: 1000,
+  hotel: 3000,
+  house: 5000,
+  palace: 10000,
+};
 
 const roomsCapacity = {
   '1': ['1'],
@@ -53,12 +63,24 @@ const validateCapacity = () => roomsCapacity[roomsField.value].includes(capacity
 
 const getCapacityErrorMessage = () => `Размещение в ${roomsField.value} ${roomsField.value === '1' ? 'комнате' : 'комнатах'} для ${capacityField.value} ${capacityField.value === '1' ? 'гостя' : 'гостей'} невозможно`;
 
-pristine.addValidator(roomsField, validateCapacity, getCapacityErrorMessage);
-pristine.addValidator(capacityField, validateCapacity, getCapacityErrorMessage);
+const validateRealtyPrice = () => {
+  const unit = realtyTypeField.value;
+  const minCost = realtyMinPrice[unit];
+  return realtyPriceField.value >= minCost;
+};
+
+const getRealtyPriceErrorMessage = () => {
+  const unit = realtyTypeField.value;
+  return `Минимальная цена за этот тип размещения - ${realtyMinPrice[unit]} руб.`;
+};
 
 formOfAdvert.addEventListener('submit', (evt) => {
   evt.preventDefault();
   pristine.validate();
 });
+
+pristine.addValidator(realtyTypeField, validateRealtyPrice, getRealtyPriceErrorMessage);
+pristine.addValidator(roomsField, validateCapacity, getCapacityErrorMessage);
+pristine.addValidator(capacityField, validateCapacity, getCapacityErrorMessage);
 
 export { disableForm, enableForm };

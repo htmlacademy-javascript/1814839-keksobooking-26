@@ -669,7 +669,8 @@ fieldset {
 #price,
 #title,
 #address,
-#room_number {
+#room_number,
+#type {
   margin-top: 5px;
 }
 
