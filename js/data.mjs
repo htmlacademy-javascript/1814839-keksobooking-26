@@ -36,7 +36,6 @@ const DESCRIPTIONS = [
   'Massa tempor nec feugiat nisl pretium fusce id velit.',
   'Egestas integer eget aliquet nibh praesent tristique magna.',
   'Eu feugiat pretium nibh ipsum consequat nisl.'];
-
 const PHOTO_ADRESS = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/';
 const PHOTOS = [
   `${PHOTO_ADRESS}duonguyen-8LrGtIxxa4w.jpg`,
