@@ -51,16 +51,6 @@ const enableForm = () => {
 };
 
 // валидация формы
-const switchCheckInOutTime = () => {
-  checkInTimeField.addEventListener('change', () => {
-    checkOutTimeField.value = checkInTimeField.value;
-  });
-  checkOutTimeField.addEventListener('change', () => {
-    checkInTimeField.value = checkOutTimeField.value;
-  });
-};
-
-switchCheckInOutTime();
 
 const pristine = new Pristine(formOfAdvert,
   {
@@ -96,5 +86,16 @@ formOfAdvert.addEventListener('submit', (evt) => {
 pristine.addValidator(realtyTypeField, validateRealtyPrice, getRealtyPriceErrorMessage);
 pristine.addValidator(roomsField, validateCapacity, getCapacityErrorMessage);
 pristine.addValidator(capacityField, validateCapacity, getCapacityErrorMessage);
+
+const onCheckOutSwitch = () => {
+  checkOutTimeField.value = checkInTimeField.value;
+};
+
+const onCheckInSwitch = () => {
+  checkInTimeField.value = checkOutTimeField.value;
+};
+
+checkInTimeField.addEventListener('change', onCheckOutSwitch);
+checkOutTimeField.addEventListener('change', onCheckInSwitch);
 
 export { disableForm, enableForm };
