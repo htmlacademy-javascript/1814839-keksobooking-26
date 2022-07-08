@@ -1,7 +1,6 @@
-import { createObjectsArray } from './data.mjs';
+import { createRealtyDescriptionCards } from './data.mjs';
 import './generate-popups.mjs';
-import { inactivateAll, activateAll } from './form.mjs';
+import { disableForm, enableForm } from './form.mjs';
 
-createObjectsArray();
-// inactivateAll();
-activateAll();
+createRealtyDescriptionCards();
+enableForm();

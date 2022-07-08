@@ -666,6 +666,12 @@ fieldset {
           box-shadow: 0 0 2px 2px #ff6547;
 }
 
+#price,
+#title,
+#address,
+#room_number {
+  margin-top: 5px;
+}
 
 /* Футер
    ========================================================================== */
@@ -959,6 +965,12 @@ fieldset {
   color: #ffffff;
   font-size: 50px;
   font-weight: 700;
+}
+
+.ad-form__label--error {
+  margin-top: 5px;
+  color: red;
+  font-size: 10px;
 }
 
 .success__message::before,
