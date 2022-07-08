@@ -77,7 +77,6 @@ const getRealtyPriceErrorMessage = () => {
   return `Минимальная цена за этот тип размещения - ${realtyMinPrice[unit]} руб.`;
 };
 
-
 formOfAdvert.addEventListener('submit', (evt) => {
   evt.preventDefault();
   pristine.validate();
