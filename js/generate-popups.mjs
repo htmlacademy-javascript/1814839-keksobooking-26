@@ -14,6 +14,8 @@ const realtyType = {
   hotel: 'Отель',
 };
 
+//---------------------------------------------------------------------------------------------------------------//
+
 const realtyCards = createRealtyDescriptionCards();
 
 const realtyCardTemplateFragment = document.createDocumentFragment();
@@ -73,7 +75,6 @@ const controlPhotosAppend = (params) => {
 
 realtyCards.forEach((card) => {
   const newCardTemplate = realtyCardTemplate.cloneNode(true);
-
   controlDataAppend(
     {
       element: newCardTemplate,
@@ -81,7 +82,6 @@ realtyCards.forEach((card) => {
       data: card.offer.title
     }
   );
-
   controlDataAppend(
     {
       element: newCardTemplate,
@@ -89,7 +89,6 @@ realtyCards.forEach((card) => {
       data: card.offer.address
     }
   );
-
   controlDataAppend(
     {
       element: newCardTemplate,
@@ -97,7 +96,6 @@ realtyCards.forEach((card) => {
       data: `${card.offer.price} ₽/ночь`
     }
   );
-
   controlDataAppend(
     {
       element: newCardTemplate,
@@ -105,7 +103,6 @@ realtyCards.forEach((card) => {
       data: realtyType[card.offer.type]
     }
   );
-
   controlDataAppend(
     {
       element: newCardTemplate,
@@ -113,7 +110,6 @@ realtyCards.forEach((card) => {
       data: `${card.offer.rooms} комнаты для ${card.offer.guests} гостей`
     }
   );
-
   controlDataAppend(
     {
       element: newCardTemplate,
@@ -121,7 +117,6 @@ realtyCards.forEach((card) => {
       data: `Заезд после ${card.offer.checkin}, выезд до ${card.offer.checkout}`,
     }
   );
-
   controlDataAppend(
     {
       element: newCardTemplate,
@@ -129,7 +124,6 @@ realtyCards.forEach((card) => {
       data: card.offer.description
     }
   );
-
   controlAvatarAppend(
     {
       selector: '.popup__avatar',
