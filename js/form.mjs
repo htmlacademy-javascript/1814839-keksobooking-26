@@ -26,18 +26,18 @@ const roomsCapacity = {
 
 // активация и деактивация формы
 
-const disableFormFields = (elementsArray, node) => {
-  elementsArray.forEach((element) => {
+const disableFormFields = (formFields, form) => {
+  formFields.forEach((element) => {
     element.disabled = true;
   });
-  node.classList.add('ad-form--disabled');
+  form.classList.add('ad-form--disabled');
 };
 
-const enableFormFields = (elementsArray, node) => {
-  elementsArray.forEach((element) => {
+const enableFormFields = (formFields, form) => {
+  formFields.forEach((element) => {
     element.disabled = false;
   });
-  node.classList.remove('ad-form--disabled');
+  form.classList.remove('ad-form--disabled');
 };
 
 const disableForm = () => {
