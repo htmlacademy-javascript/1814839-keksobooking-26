@@ -8,6 +8,7 @@ const realtyTypeField = formOfAdvert.querySelector('[name="type"]');
 const realtyPriceField = formOfAdvert.querySelector('[name="price"]');
 const checkInTimeField = formOfAdvert.querySelector('[name="timein"]');
 const checkOutTimeField = formOfAdvert.querySelector('[name="timeout"]');
+const priceSlider = document.querySelector('.ad-form__slider');
 
 const realtyMinPrice = {
   bungalow: 0,
@@ -26,18 +27,18 @@ const roomsCapacity = {
 
 // активация и деактивация формы
 
-const disableFormFields = (elementsArray, node) => {
-  elementsArray.forEach((element) => {
+const disableFormFields = (formFields, form) => {
+  formFields.forEach((element) => {
     element.disabled = true;
   });
-  node.classList.add('ad-form--disabled');
+  form.classList.add('ad-form--disabled');
 };
 
-const enableFormFields = (elementsArray, node) => {
-  elementsArray.forEach((element) => {
+const enableFormFields = (formFields, form) => {
+  formFields.forEach((element) => {
     element.disabled = false;
   });
-  node.classList.remove('ad-form--disabled');
+  form.classList.remove('ad-form--disabled');
 };
 
 const disableForm = () => {
@@ -97,4 +98,30 @@ const onCheckInSwitch = () => {
 checkInTimeField.addEventListener('change', onCheckOutSwitch);
 checkOutTimeField.addEventListener('change', onCheckInSwitch);
 
-export { disableForm, enableForm };
+disableForm();
+
+// СЛАЙДЕР
+
+noUiSlider.create(priceSlider, {
+  start: [0],
+  connect: [true, false],
+  format: {
+    to: function (value) {
+      return value.toFixed(0);
+    },
+    from: function (value) {
+      return parseFloat(value);
+    },
+  },
+  step: 1,
+  range: {
+    'min': 0,
+    'max': 100000
+  }
+});
+
+priceSlider.noUiSlider.on('update', () => {
+  realtyPriceField.value = priceSlider.noUiSlider.get();
+});
+
+export { enableForm };
