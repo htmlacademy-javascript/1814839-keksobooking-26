@@ -151,3 +151,5 @@ realtyCards.forEach((card) => {
 
 mapCanvas.append(realtyCardTemplateFragment);
 
+export { realtyType, controlFeaturesAppend, controlPhotosAppend, controlAvatarAppend, controlDataAppend };
+

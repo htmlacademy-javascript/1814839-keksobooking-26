@@ -97,4 +97,6 @@ const onCheckInSwitch = () => {
 checkInTimeField.addEventListener('change', onCheckOutSwitch);
 checkOutTimeField.addEventListener('change', onCheckInSwitch);
 
-export { disableForm, enableForm };
+disableForm();
+
+export { enableForm };

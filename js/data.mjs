@@ -21,8 +21,7 @@ const TITLES_OF_REALTY = [
   'Здесь жил Тед Банди',
   'Больше не могу ничего придумать'
 ];
-const TYPES_OF_REALTY
-  = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
+const TYPES_OF_REALTY = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 const CHECK_IN_OUT_TIME = ['12:00', '13:00', '14:00'];
 const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 const DESCRIPTIONS = [
@@ -35,7 +34,8 @@ const DESCRIPTIONS = [
   'Quis lectus nulla at volutpat diam.',
   'Massa tempor nec feugiat nisl pretium fusce id velit.',
   'Egestas integer eget aliquet nibh praesent tristique magna.',
-  'Eu feugiat pretium nibh ipsum consequat nisl.'];
+  'Eu feugiat pretium nibh ipsum consequat nisl.'
+];
 const PHOTO_ADRESS = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/';
 const PHOTOS = [
   `${PHOTO_ADRESS}duonguyen-8LrGtIxxa4w.jpg`,
@@ -63,8 +63,7 @@ const createRealtyDescriptionCard = () => {
       ),
       address: `${locLat}, ${locLng}`,
       price: Math.floor(getRandomNonInteger(1000, 50000)),
-      type: getRandomElement(TYPES_OF_REALTY
-      ),
+      type: getRandomElement(TYPES_OF_REALTY),
       rooms: Math.floor(getRandomNonInteger(1, 10)),
       guests: Math.floor(getRandomNonInteger(1, 10)),
       checkin: getRandomElement(CHECK_IN_OUT_TIME),

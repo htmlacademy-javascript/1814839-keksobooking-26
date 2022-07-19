@@ -1,6 +1,7 @@
-import { createRealtyDescriptionCards } from './data.mjs';
-import './generate-popups.mjs';
-import { disableForm, enableForm } from './form.mjs';
+// import { createRealtyDescriptionCards } from './data.mjs';
+// import './generate-popups.mjs';
+import './form.mjs';
+import './map.mjs';
+import './markers.mjs';
 
-createRealtyDescriptionCards();
-enableForm();
+// createRealtyDescriptionCards();
