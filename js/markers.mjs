@@ -1,10 +1,10 @@
 import { map } from './map.mjs';
 import { createRealtyDescriptionCards } from './data.mjs';
-import { realtyType, controlFeaturesAppend, controlPhotosAppend, controlAvatarAppend, controlDataAppend } from './generate-popups.mjs';
+import { createFullDescriptionPopup } from './full-description-popups.mjs';
 
 const addressField = document.querySelector('[name = "address"]');
 
-// главный маркер
+// ГЛАВНЫЙ МАРКЕР
 
 const mainPinIcon = L.icon({
   iconUrl: './img/main-pin.svg',
@@ -32,7 +32,7 @@ mainPinMarker.on('moveend', (evt) => {
   addressField.value = `${lat}, ${lng}`;
 });
 
-// остальные маркеры
+// ОСТАЛЬНЫЕ МАРКЕРЫ
 
 const pinIcon = L.icon({
   iconUrl: './img/pin.svg',
@@ -43,73 +43,6 @@ const pinIcon = L.icon({
 mainPinMarker.addTo(map);
 
 const realtyDescriptionCards = createRealtyDescriptionCards();
-
-// попапы на маркерах
-
-const createCustomPopup = (point) => {
-  const popupTemplate = document.querySelector('#popupTemplate').content.querySelector('.popup');
-  const popupElement = popupTemplate.cloneNode(true);
-
-  controlAvatarAppend({
-    url: point.author.avatar,
-    selector: '.popup__avatar',
-    element: popupElement,
-  });
-
-  controlDataAppend({
-    element: popupElement,
-    selector: '.popup__title',
-    data: point.offer.title,
-  });
-
-  controlDataAppend({
-    element: popupElement,
-    selector: '.popup__text--address',
-    data: point.offer.address,
-  });
-
-  controlDataAppend({
-    element: popupElement,
-    selector: '.popup__text--price',
-    data: `${point.offer.price} ₽/ночь`,
-  });
-
-  controlDataAppend({
-    element: popupElement,
-    selector: '.popup__type',
-    data: realtyType[point.offer.type],
-  });
-
-  controlDataAppend({
-    element: popupElement,
-    selector: '.popup__text--capacity',
-    data: `${point.offer.rooms} комнаты для ${point.offer.guests} гостей`,
-  });
-
-  controlDataAppend({
-    element: popupElement,
-    selector: '.popup__text--time',
-    data: `Заезд после ${point.offer.checkin}, выезд до ${point.offer.checkout}`,
-  });
-
-  popupElement.querySelector('.popup__features').innerHTML = '';
-  controlFeaturesAppend(
-    {
-      data: point.offer.features,
-      element: popupElement,
-    }
-  );
-
-  popupElement.querySelector('.popup__description').textContent = point.offer.description;
-
-  popupElement.querySelector('.popup__photos').innerHTML = '';
-  controlPhotosAppend({
-    data: point.offer.photos,
-    element: popupElement
-  });
-
-  return popupElement;
-};
 
 // создает маркеры по координатам из массива
 realtyDescriptionCards.forEach((card) => {
@@ -126,7 +59,7 @@ realtyDescriptionCards.forEach((card) => {
     });
   pinMarker
     .addTo(map)
-    .bindPopup(createCustomPopup(card));
+    .bindPopup(createFullDescriptionPopup(card));
 });
 
 
