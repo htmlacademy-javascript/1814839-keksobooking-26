@@ -8,6 +8,7 @@ const realtyTypeField = formOfAdvert.querySelector('[name="type"]');
 const realtyPriceField = formOfAdvert.querySelector('[name="price"]');
 const checkInTimeField = formOfAdvert.querySelector('[name="timein"]');
 const checkOutTimeField = formOfAdvert.querySelector('[name="timeout"]');
+const priceSlider = document.querySelector('.ad-form__slider');
 
 const realtyMinPrice = {
   bungalow: 0,
@@ -98,5 +99,29 @@ checkInTimeField.addEventListener('change', onCheckOutSwitch);
 checkOutTimeField.addEventListener('change', onCheckInSwitch);
 
 disableForm();
+
+// СЛАЙДЕР
+
+noUiSlider.create(priceSlider, {
+  start: [0],
+  connect: [true, false],
+  format: {
+    to: function (value) {
+      return value.toFixed(0);
+    },
+    from: function (value) {
+      return parseFloat(value);
+    },
+  },
+  step: 1,
+  range: {
+    'min': 0,
+    'max': 100000
+  }
+});
+
+priceSlider.noUiSlider.on('update', () => {
+  realtyPriceField.value = priceSlider.noUiSlider.get();
+});
 
 export { enableForm };
