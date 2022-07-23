@@ -1,5 +1,6 @@
 import { map } from './map.mjs';
 import { createFullDescriptionPopup } from './full-description-popups.mjs';
+import { createDataLoader } from './api.mjs';
 
 const addressField = document.querySelector('[name = "address"]');
 
@@ -61,4 +62,5 @@ const createMarkers = (array) => {
   });
 };
 
-export { createMarkers };
+createDataLoader(createMarkers, console.error);
+
