@@ -1,5 +1,4 @@
 import { map } from './map.mjs';
-import { createRealtyDescriptionCards } from './data.mjs';
 import { createFullDescriptionPopup } from './full-description-popups.mjs';
 
 const addressField = document.querySelector('[name = "address"]');
@@ -42,24 +41,24 @@ const pinIcon = L.icon({
 
 mainPinMarker.addTo(map);
 
-const realtyDescriptionCards = createRealtyDescriptionCards();
-
 // создает маркеры по координатам из массива
-realtyDescriptionCards.forEach((card) => {
-  const cardLat = card.location.lat;
-  const cardLng = card.location.lng;
+const createMarkers = (array) => {
+  array.forEach((card) => {
+    const cardLat = card.location.lat;
+    const cardLng = card.location.lng;
 
-  const pinMarker = L.marker(
-    {
-      lat: cardLat,
-      lng: cardLng,
-    },
-    {
-      icon: pinIcon,
-    });
-  pinMarker
-    .addTo(map)
-    .bindPopup(createFullDescriptionPopup(card));
-});
+    const pinMarker = L.marker(
+      {
+        lat: cardLat,
+        lng: cardLng,
+      },
+      {
+        icon: pinIcon,
+      });
+    pinMarker
+      .addTo(map)
+      .bindPopup(createFullDescriptionPopup(card));
+  });
+};
 
-
+export { createMarkers };
