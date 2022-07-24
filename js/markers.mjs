@@ -1,6 +1,6 @@
 import { map } from './map.mjs';
-import { createRealtyDescriptionCards } from './data.mjs';
 import { createFullDescriptionPopup } from './full-description-popups.mjs';
+import { createDataLoader } from './api.mjs';
 
 const addressField = document.querySelector('[name = "address"]');
 
@@ -25,7 +25,7 @@ const mainPinMarker = L.marker(
 
 addressField.value = `${mainPinMarker.getLatLng().lat.toFixed(5)}, ${mainPinMarker.getLatLng().lng.toFixed(5)}`;
 
-// передает координаты якоря маркера полю Адрес
+// передает координаты якоря маркера полю Адрес при передвижении
 mainPinMarker.on('moveend', (evt) => {
   const lat = evt.target.getLatLng().lat.toFixed(5);
   const lng = evt.target.getLatLng().lng.toFixed(5);
@@ -42,24 +42,35 @@ const pinIcon = L.icon({
 
 mainPinMarker.addTo(map);
 
-const realtyDescriptionCards = createRealtyDescriptionCards();
-
 // создает маркеры по координатам из массива
-realtyDescriptionCards.forEach((card) => {
-  const cardLat = card.location.lat;
-  const cardLng = card.location.lng;
+const createMarkers = (array) => {
+  array.forEach((card) => {
+    const cardLat = card.location.lat;
+    const cardLng = card.location.lng;
 
-  const pinMarker = L.marker(
-    {
-      lat: cardLat,
-      lng: cardLng,
-    },
-    {
-      icon: pinIcon,
-    });
-  pinMarker
-    .addTo(map)
-    .bindPopup(createFullDescriptionPopup(card));
-});
+    const pinMarker = L.marker(
+      {
+        lat: cardLat,
+        lng: cardLng,
+      },
+      {
+        icon: pinIcon,
+      });
+    pinMarker
+      .addTo(map)
+      .bindPopup(createFullDescriptionPopup(card));
+  });
+};
 
+createDataLoader(createMarkers, console.error);
 
+// возвращает в исходное пложение
+const resetMapItems = () => {
+  mainPinMarker.setLatLng({
+    lat: 35.652832,
+    lng: 139.839478,
+  });
+  map.closePopup();
+};
+
+export { resetMapItems };
