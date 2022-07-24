@@ -25,7 +25,7 @@ const mainPinMarker = L.marker(
 
 addressField.value = `${mainPinMarker.getLatLng().lat.toFixed(5)}, ${mainPinMarker.getLatLng().lng.toFixed(5)}`;
 
-// передает координаты якоря маркера полю Адрес
+// передает координаты якоря маркера полю Адрес при передвижении
 mainPinMarker.on('moveend', (evt) => {
   const lat = evt.target.getLatLng().lat.toFixed(5);
   const lng = evt.target.getLatLng().lng.toFixed(5);
@@ -64,3 +64,13 @@ const createMarkers = (array) => {
 
 createDataLoader(createMarkers, console.error);
 
+// возвращает в исходное пложение
+const resetMapItems = () => {
+  mainPinMarker.setLatLng({
+    lat: 35.652832,
+    lng: 139.839478,
+  });
+  map.closePopup();
+};
+
+export { resetMapItems };

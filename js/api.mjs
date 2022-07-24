@@ -1,3 +1,5 @@
+import { controlSuccessMessage } from './util.mjs';
+
 const createDataLoader = (onSuccess, onError) => {
   fetch('https://26.javascript.pages.academy/keksobooking/data')
     .then((response) => {
@@ -14,4 +16,24 @@ const createDataLoader = (onSuccess, onError) => {
     });
 };
 
-export { createDataLoader };
+const sendData = (data, onSuccess, onError) => {
+  fetch(
+    'https://26.javascript.pages.academy/keksobooking',
+    {
+      method: 'POST',
+      data,
+    }
+  ).then((response) => {
+    if (response.ok) {
+      onSuccess();
+      controlSuccessMessage();
+    } else {
+      onError();
+    }
+  })
+    .catch(() => {
+      onError();
+    });
+};
+
+export { createDataLoader, sendData };

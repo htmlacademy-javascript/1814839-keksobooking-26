@@ -1,3 +1,6 @@
+import { controlErrorMessage } from './util.mjs';
+import { sendData } from './api.mjs';
+
 const formOfAdvert = document.querySelector('.ad-form');
 const formOfAdvertFields = formOfAdvert.querySelectorAll('fieldset');
 const filtersOfAdverts = document.querySelector('.map__filters');
@@ -25,7 +28,7 @@ const roomsCapacity = {
   '100': ['0']
 };
 
-// активация и деактивация формы
+// АКТИВАЦИЯ И ДЕЗАКТИВАЦИЯ
 
 const disableFormFields = (formFields, form) => {
   formFields.forEach((element) => {
@@ -51,7 +54,14 @@ const enableForm = () => {
   enableFormFields(filtersOfAdvertsFields, filtersOfAdverts);
 };
 
-// валидация формы
+// ОЧИСТКА
+
+const formFieldsReset = () => {
+  formOfAdvert.reset();
+};
+
+
+// ВАЛИДАЦИЯ
 
 const pristine = new Pristine(formOfAdvert,
   {
@@ -78,11 +88,6 @@ const getRealtyPriceErrorMessage = () => {
   return `Минимальная цена за этот тип размещения - ${realtyMinPrice[unit]} руб.`;
 };
 
-formOfAdvert.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  pristine.validate();
-});
-
 pristine.addValidator(realtyTypeField, validateRealtyPrice, getRealtyPriceErrorMessage);
 pristine.addValidator(roomsField, validateCapacity, getCapacityErrorMessage);
 pristine.addValidator(capacityField, validateCapacity, getCapacityErrorMessage);
@@ -99,6 +104,26 @@ checkInTimeField.addEventListener('change', onCheckOutSwitch);
 checkOutTimeField.addEventListener('change', onCheckInSwitch);
 
 disableForm();
+
+
+// ОТПРАВКА ФОРМЫ
+
+const setUserFormSubmit = (onSuccess) => {
+  formOfAdvert.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const validate = pristine.validate();
+
+    if (validate) {
+      const formData = new FormData(evt.target);
+
+      sendData(
+        formData,
+        () => onSuccess(),
+        () => controlErrorMessage(),
+      );
+    }
+  });
+};
 
 // СЛАЙДЕР
 
@@ -124,4 +149,4 @@ priceSlider.noUiSlider.on('update', () => {
   realtyPriceField.value = priceSlider.noUiSlider.get();
 });
 
-export { enableForm };
+export { enableForm, formFieldsReset, setUserFormSubmit };

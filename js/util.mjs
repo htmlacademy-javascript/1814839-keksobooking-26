@@ -40,4 +40,29 @@ const createListElement = (params) => {
   return li;
 };
 
-export { getRandomNonInteger, getRandomElement, appendRandomCountElements, getRandomInteger, addPadStart, createPhotoElement, createListElement };
+const controlSuccessMessage = () => {
+  const successTemplate = document.querySelector('#success').content.querySelector('.success');
+  const success = successTemplate.cloneNode(true);
+  document.body.append(success);
+
+  const onErrorButtonClick = () => {
+    success.remove();
+  };
+
+  window.addEventListener('click', onErrorButtonClick);
+};
+
+const controlErrorMessage = () => {
+  const errorTemplate = document.querySelector('#error').content.querySelector('.error');
+  const error = errorTemplate.cloneNode(true);
+  const errorButton = error.querySelector('.error__button');
+  document.body.append(error);
+
+  const onErrorButtonClick = () => {
+    error.remove();
+  };
+
+  errorButton.addEventListener('click', onErrorButtonClick);
+};
+
+export { getRandomNonInteger, getRandomElement, appendRandomCountElements, getRandomInteger, addPadStart, createPhotoElement, createListElement, controlSuccessMessage, controlErrorMessage };
