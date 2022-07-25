@@ -38,15 +38,6 @@ const showSuccessMessage = () => {
   document.body.append(success);
   document.addEventListener('click', onSuccessButtonClick, { once: true });
   document.addEventListener('keydown', onSuccessEscKeydown, { once: true });
-
-  // FIXME я знаю, что это ОЧЕНЬ ПЛОХОЕ решение, но как по-другому удалить листенеры и при этом не поломать
-  // поведение showSuccessMessage, я не знаю, помоги?
-  const deleteEventListeners = () => {
-    document.removeEventListener('click', onSuccessButtonClick);
-    document.removeEventListener('keydown', onSuccessEscKeydown);
-  };
-
-  setTimeout(deleteEventListeners, 30000);
 };
 //------------------------------------------//
 
