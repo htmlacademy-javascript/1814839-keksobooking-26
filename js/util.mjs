@@ -19,18 +19,9 @@ const onErrorEscKeydown = (evt) => {
 
 const showErrorMessage = () => {
   document.body.append(error);
-  errorButton.addEventListener('click', onErrorButtonClick);
-  document.addEventListener('click', onErrorButtonClick);
-  document.addEventListener('keydown', onErrorEscKeydown);
-
-  // FIXME я знаю, что это ОЧЕНЬ ПЛОХОЕ решение, но как по-другому удалить листенеры и при этом не поломать
-  // поведение showErrorMessage, я не знаю, помоги?
-  const deleteEventListeners = () => {
-    document.removeEventListener('click', onErrorButtonClick);
-    document.removeEventListener('keydown', onErrorEscKeydown);
-  };
-
-  setTimeout(deleteEventListeners, 30000);
+  errorButton.addEventListener('click', onErrorButtonClick, { once: true });
+  document.addEventListener('click', onErrorButtonClick, { once: true });
+  document.addEventListener('keydown', onErrorEscKeydown, { once: true });
 };
 
 const onSuccessButtonClick = () => {
@@ -45,8 +36,8 @@ const onSuccessEscKeydown = (evt) => {
 
 const showSuccessMessage = () => {
   document.body.append(success);
-  document.addEventListener('click', onSuccessButtonClick);
-  document.addEventListener('keydown', onSuccessEscKeydown);
+  document.addEventListener('click', onSuccessButtonClick, { once: true });
+  document.addEventListener('keydown', onSuccessEscKeydown, { once: true });
 
   // FIXME я знаю, что это ОЧЕНЬ ПЛОХОЕ решение, но как по-другому удалить листенеры и при этом не поломать
   // поведение showSuccessMessage, я не знаю, помоги?
