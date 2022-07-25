@@ -1,4 +1,4 @@
-import { controlErrorMessage } from './util.mjs';
+import { controlErrorMessage, controlSuccessMessage } from './util.mjs';
 import { sendData } from './api.mjs';
 
 const formOfAdvert = document.querySelector('.ad-form');
@@ -118,8 +118,8 @@ const setUserFormSubmit = (onSuccess) => {
 
       sendData(
         formData,
-        () => onSuccess(),
-        () => controlErrorMessage(),
+        () => [onSuccess(), controlSuccessMessage()],
+        () => [controlErrorMessage()],
       );
     }
   });

@@ -40,16 +40,23 @@ const createListElement = (params) => {
   return li;
 };
 
+const isEscKey = (evt) => evt.key === 'Escape';
+
 const controlSuccessMessage = () => {
   const successTemplate = document.querySelector('#success').content.querySelector('.success');
   const success = successTemplate.cloneNode(true);
   document.body.append(success);
 
-  const onErrorButtonClick = () => {
+  const onSuccessButtonClick = () => {
     success.remove();
   };
 
-  window.addEventListener('click', onErrorButtonClick);
+  document.addEventListener('click', onSuccessButtonClick);
+  document.addEventListener('keydown', (evt) => {
+    if (isEscKey(evt)) {
+      success.remove();
+    }
+  });
 };
 
 const controlErrorMessage = () => {
@@ -63,6 +70,12 @@ const controlErrorMessage = () => {
   };
 
   errorButton.addEventListener('click', onErrorButtonClick);
+  document.addEventListener('click', onErrorButtonClick);
+  document.addEventListener('keydown', (evt) => {
+    if (isEscKey(evt)) {
+      error.remove();
+    }
+  });
 };
 
 export { getRandomNonInteger, getRandomElement, appendRandomCountElements, getRandomInteger, addPadStart, createPhotoElement, createListElement, controlSuccessMessage, controlErrorMessage };
