@@ -1,4 +1,4 @@
-import { controlErrorMessage, controlSuccessMessage } from './util.mjs';
+import { showErrorMessage, showSuccessMessage } from './util.mjs';
 import { sendData } from './api.mjs';
 
 const formOfAdvert = document.querySelector('.ad-form');
@@ -107,6 +107,7 @@ disableForm();
 
 
 // ОТПРАВКА ФОРМЫ
+
 const setUserFormSubmit = (onSuccess) => {
   formOfAdvert.addEventListener('submit', (evt) => {
     evt.preventDefault();
@@ -117,8 +118,8 @@ const setUserFormSubmit = (onSuccess) => {
 
       sendData(
         formData,
-        () => [onSuccess(), controlSuccessMessage()],
-        () => [controlErrorMessage()],
+        () => [onSuccess(), showSuccessMessage()],
+        () => [showErrorMessage()],
       );
     }
   });

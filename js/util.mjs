@@ -1,3 +1,64 @@
+//---АЛЛЕРТЫ ПРИ ВЗАИМОДЕЙСТВИИ С ФОРМОЙ---//
+const successTemplate = document.querySelector('#success').content.querySelector('.success');
+const success = successTemplate.cloneNode(true);
+const errorTemplate = document.querySelector('#error').content.querySelector('.error');
+const error = errorTemplate.cloneNode(true);
+const errorButton = error.querySelector('.error__button');
+
+const isEscKey = (evt) => evt.key === 'Escape';
+
+const onErrorButtonClick = () => {
+  error.remove();
+};
+
+const onErrorEscKeydown = (evt) => {
+  if (isEscKey(evt)) {
+    error.remove();
+  }
+};
+
+const showErrorMessage = () => {
+  document.body.append(error);
+  errorButton.addEventListener('click', onErrorButtonClick);
+  document.addEventListener('click', onErrorButtonClick);
+  document.addEventListener('keydown', onErrorEscKeydown);
+
+  // FIXME я знаю, что это ОЧЕНЬ ПЛОХОЕ решение, но как по-другому удалить листенеры и при этом не поломать
+  // поведение showErrorMessage, я не знаю, помоги?
+  const deleteEventListeners = () => {
+    document.removeEventListener('click', onErrorButtonClick);
+    document.removeEventListener('keydown', onErrorEscKeydown);
+  };
+
+  setTimeout(deleteEventListeners, 15000);
+};
+
+const onSuccessButtonClick = () => {
+  success.remove();
+};
+
+const onSuccessEscKeydown = (evt) => {
+  if (isEscKey(evt)) {
+    success.remove();
+  }
+};
+
+const showSuccessMessage = () => {
+  document.body.append(success);
+  document.addEventListener('click', onSuccessButtonClick);
+  document.addEventListener('keydown', onSuccessEscKeydown);
+
+  // FIXME я знаю, что это ОЧЕНЬ ПЛОХОЕ решение, но как по-другому удалить листенеры и при этом не поломать
+  // поведение showSuccessMessage, я не знаю, помоги?
+  const deleteEventListeners = () => {
+    document.removeEventListener('click', onSuccessButtonClick);
+    document.removeEventListener('keydown', onSuccessEscKeydown);
+  };
+
+  setTimeout(deleteEventListeners, 15000);
+};
+//------------------------------------------//
+
 const getRandomNonInteger = (min, max) => (Math.random() * (max - min + 1) + min);
 const getRandomInteger = (min, max) => Math.floor(getRandomNonInteger(min, max));
 
@@ -40,42 +101,4 @@ const createListElement = (params) => {
   return li;
 };
 
-const isEscKey = (evt) => evt.key === 'Escape';
-
-const controlSuccessMessage = () => {
-  const successTemplate = document.querySelector('#success').content.querySelector('.success');
-  const success = successTemplate.cloneNode(true);
-  document.body.append(success);
-
-  const onSuccessButtonClick = () => {
-    success.remove();
-  };
-
-  document.addEventListener('click', onSuccessButtonClick);
-  document.addEventListener('keydown', (evt) => {
-    if (isEscKey(evt)) {
-      success.remove();
-    }
-  });
-};
-
-const controlErrorMessage = () => {
-  const errorTemplate = document.querySelector('#error').content.querySelector('.error');
-  const error = errorTemplate.cloneNode(true);
-  const errorButton = error.querySelector('.error__button');
-  document.body.append(error);
-
-  const onErrorButtonClick = () => {
-    error.remove();
-  };
-
-  errorButton.addEventListener('click', onErrorButtonClick);
-  document.addEventListener('click', onErrorButtonClick);
-  document.addEventListener('keydown', (evt) => {
-    if (isEscKey(evt)) {
-      error.remove();
-    }
-  });
-};
-
-export { getRandomNonInteger, getRandomElement, appendRandomCountElements, getRandomInteger, addPadStart, createPhotoElement, createListElement, controlSuccessMessage, controlErrorMessage };
+export { getRandomNonInteger, getRandomElement, appendRandomCountElements, getRandomInteger, addPadStart, createPhotoElement, createListElement, showSuccessMessage, showErrorMessage };
