@@ -30,7 +30,7 @@ const showErrorMessage = () => {
     document.removeEventListener('keydown', onErrorEscKeydown);
   };
 
-  setTimeout(deleteEventListeners, 15000);
+  setTimeout(deleteEventListeners, 30000);
 };
 
 const onSuccessButtonClick = () => {
@@ -55,7 +55,7 @@ const showSuccessMessage = () => {
     document.removeEventListener('keydown', onSuccessEscKeydown);
   };
 
-  setTimeout(deleteEventListeners, 15000);
+  setTimeout(deleteEventListeners, 30000);
 };
 //------------------------------------------//
 
