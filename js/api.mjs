@@ -1,5 +1,3 @@
-import { controlSuccessMessage } from './util.mjs';
-
 const createDataLoader = (onSuccess, onError) => {
   fetch('https://26.javascript.pages.academy/keksobooking/data')
     .then((response) => {
@@ -16,7 +14,8 @@ const createDataLoader = (onSuccess, onError) => {
     });
 };
 
-const sendData = (data, onSuccess, onError) => {
+// переписать, не работает на получение нескольких функций
+const sendData = (data, onSuccessFuncs, onError) => {
   fetch(
     'https://26.javascript.pages.academy/keksobooking',
     {
@@ -25,8 +24,9 @@ const sendData = (data, onSuccess, onError) => {
     }
   ).then((response) => {
     if (response.ok) {
-      onSuccess();
-      controlSuccessMessage();
+      onSuccessFuncs.forEach((func) => {
+        func();
+      });
     } else {
       onError();
     }
