@@ -14,8 +14,7 @@ const createDataLoader = (onSuccess, onError) => {
     });
 };
 
-// переписать, не работает на получение нескольких функций
-const sendData = (data, onSuccessFuncs, onError) => {
+const sendData = (data, onSuccess, onError) => {
   fetch(
     'https://26.javascript.pages.academy/keksobooking',
     {
@@ -24,9 +23,7 @@ const sendData = (data, onSuccessFuncs, onError) => {
     }
   ).then((response) => {
     if (response.ok) {
-      onSuccessFuncs.forEach((func) => {
-        func();
-      });
+      onSuccess();
     } else {
       onError();
     }

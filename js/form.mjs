@@ -107,7 +107,6 @@ disableForm();
 
 
 // ОТПРАВКА ФОРМЫ
-
 const setUserFormSubmit = (onSuccess) => {
   formOfAdvert.addEventListener('submit', (evt) => {
     evt.preventDefault();
