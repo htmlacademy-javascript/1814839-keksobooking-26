@@ -1,6 +1,8 @@
 import { map } from './map.mjs';
 import { createFullDescriptionPopup } from './full-description-popups.mjs';
-import { createDataLoader } from './api.mjs';
+import { getData } from './api.mjs';
+
+const SIMILAR_OFFERS_COUNT = 10;
 
 const addressField = document.querySelector('[name = "address"]');
 
@@ -44,7 +46,9 @@ mainPinMarker.addTo(map);
 
 // создает маркеры по координатам из массива
 const createMarkers = (array) => {
-  array.forEach((card) => {
+  const newArray = array.slice(0, SIMILAR_OFFERS_COUNT);
+
+  newArray.forEach((card) => {
     const cardLat = card.location.lat;
     const cardLng = card.location.lng;
 
@@ -62,7 +66,7 @@ const createMarkers = (array) => {
   });
 };
 
-createDataLoader(createMarkers, console.error);
+getData(createMarkers, console.error);
 
 // возвращает в исходное пложение
 const resetMapItems = () => {

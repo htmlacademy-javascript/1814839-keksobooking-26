@@ -1,4 +1,4 @@
-import { enableForm } from './form.mjs';
+import { enableForm } from './user-form.mjs';
 
 const map = L.map('map-canvas')
   .on('load', () => {
