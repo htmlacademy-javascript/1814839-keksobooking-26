@@ -1,8 +1,15 @@
-const housingType = document.querySelector('[name="housing-type"]');
+// const housingType = document.querySelector('[name="housing-type"]');
 
-const isThatType = (value) => value.offer.type === 'flat';
+// const initializeFormHandlers = () => {
+//   housingType.addEventListener('change', (evt) => {
 
-export { isThatType };
+//   };
+// };
 
-// нужно сделать фильтр, который бы принимал в себя массив и возвращал новый массив
-// отфильтрованный в соответствии с выбранным инпутом
+// const initializeFormHandlers = (cb) => {
+//   housingType.addEventListener('change', (evt) => {
+//     cb('марина молодец', evt.target.value);
+//   };
+// };
+
+// export { initializeFormHandlers };

@@ -1,7 +1,5 @@
 import { map } from './map.mjs';
 import { createFullDescriptionPopup } from './full-description-popups.mjs';
-import { getData } from './api.mjs';
-import { isThatType } from './filter-form.mjs';
 
 const SIMILAR_OFFERS_COUNT = 10;
 
@@ -47,8 +45,8 @@ const pinIcon = L.icon({
 
 // создает маркеры по координатам из массива
 const createMarkers = (array) => {
-  array.slice()
-    .filter((value) => isThatType(value))
+  array
+    .slice(0, SIMILAR_OFFERS_COUNT)
     .forEach((card) => {
       const cardLat = card.location.lat;
       const cardLng = card.location.lng;
@@ -67,10 +65,13 @@ const createMarkers = (array) => {
     });
 };
 
-// переписать
-// const getDataAdverts = (array) => console.log(array);
+const initializeMarkers = (dataFromBackend) => {
+  createMarkers(dataFromBackend);
+};
 
-getData(createMarkers);
+// const updateMarkers = (filteredData) => {
+//   createMarkers(filteredData);
+// };
 
 // возвращает в исходное пложение
 const resetMapItems = () => {
@@ -81,4 +82,4 @@ const resetMapItems = () => {
   map.closePopup();
 };
 
-export { resetMapItems };
+export { resetMapItems, initializeMarkers };
