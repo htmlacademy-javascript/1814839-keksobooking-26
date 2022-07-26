@@ -1,6 +1,7 @@
 import { map } from './map.mjs';
 import { createFullDescriptionPopup } from './full-description-popups.mjs';
 import { getData } from './api.mjs';
+import { isThatType } from './filter-form.mjs';
 
 const SIMILAR_OFFERS_COUNT = 10;
 
@@ -34,6 +35,8 @@ mainPinMarker.on('moveend', (evt) => {
   addressField.value = `${lat}, ${lng}`;
 });
 
+mainPinMarker.addTo(map);
+
 // ОСТАЛЬНЫЕ МАРКЕРЫ
 
 const pinIcon = L.icon({
@@ -42,31 +45,32 @@ const pinIcon = L.icon({
   iconAnchor: [20, 40],
 });
 
-mainPinMarker.addTo(map);
-
 // создает маркеры по координатам из массива
 const createMarkers = (array) => {
-  const newArray = array.slice(0, SIMILAR_OFFERS_COUNT);
+  array.slice()
+    .filter((value) => isThatType(value))
+    .forEach((card) => {
+      const cardLat = card.location.lat;
+      const cardLng = card.location.lng;
 
-  newArray.forEach((card) => {
-    const cardLat = card.location.lat;
-    const cardLng = card.location.lng;
-
-    const pinMarker = L.marker(
-      {
-        lat: cardLat,
-        lng: cardLng,
-      },
-      {
-        icon: pinIcon,
-      });
-    pinMarker
-      .addTo(map)
-      .bindPopup(createFullDescriptionPopup(card));
-  });
+      const pinMarker = L.marker(
+        {
+          lat: cardLat,
+          lng: cardLng,
+        },
+        {
+          icon: pinIcon,
+        });
+      pinMarker
+        .addTo(map)
+        .bindPopup(createFullDescriptionPopup(card));
+    });
 };
 
-getData(createMarkers, console.error);
+// переписать
+// const getDataAdverts = (array) => console.log(array);
+
+getData(createMarkers);
 
 // возвращает в исходное пложение
 const resetMapItems = () => {
