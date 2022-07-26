@@ -14,6 +14,10 @@ const getData = (onSuccess, onError) => {
     });
 };
 
+const fetchMarkers = () => {
+  return fetch('https://26.javascript.pages.academy/keksobooking/data');
+}
+
 const sendData = (body, onSuccess, onError) => {
   fetch(
     'https://26.javascript.pages.academy/keksobooking',
@@ -33,4 +37,4 @@ const sendData = (body, onSuccess, onError) => {
     });
 };
 
-export { getData, sendData };
+export { getData, sendData, fetchMarkers };

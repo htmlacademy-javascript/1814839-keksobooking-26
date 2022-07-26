@@ -43,6 +43,8 @@ const pinIcon = L.icon({
   iconAnchor: [20, 40],
 });
 
+let markers = [];
+
 // создает маркеры по координатам из массива
 const createMarkers = (array) => {
   array
@@ -59,6 +61,7 @@ const createMarkers = (array) => {
         {
           icon: pinIcon,
         });
+      markers.push(pinMarker);
       pinMarker
         .addTo(map)
         .bindPopup(createFullDescriptionPopup(card));
@@ -69,9 +72,13 @@ const initializeMarkers = (dataFromBackend) => {
   createMarkers(dataFromBackend);
 };
 
-// const updateMarkers = (filteredData) => {
-//   createMarkers(filteredData);
-// };
+const updateMarkers = (filteredData) => {
+  markers.forEach((marker) => {
+    marker.remove();
+  });
+  markers = [];
+  createMarkers(filteredData);
+};
 
 // возвращает в исходное пложение
 const resetMapItems = () => {
@@ -82,4 +89,4 @@ const resetMapItems = () => {
   map.closePopup();
 };
 
-export { resetMapItems, initializeMarkers };
+export { resetMapItems, initializeMarkers, updateMarkers };
