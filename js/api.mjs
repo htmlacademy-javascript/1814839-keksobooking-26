@@ -14,12 +14,12 @@ const getData = (onSuccess, onError) => {
     });
 };
 
-const sendData = (data, onSuccess, onError) => {
+const sendData = (body, onSuccess, onError) => {
   fetch(
     'https://26.javascript.pages.academy/keksobooking',
     {
       method: 'POST',
-      data,
+      body,
     }
   ).then((response) => {
     if (response.ok) {
