@@ -1,8 +1,8 @@
-import { enableForm } from './user-form.mjs';
+import { enableUserForm } from './user-form.mjs';
 
 const map = L.map('map-canvas')
   .on('load', () => {
-    enableForm();
+    enableUserForm();
   })
   .setView({
     lat: 35.652832,

@@ -30,28 +30,28 @@ const roomsCapacity = {
 
 // АКТИВАЦИЯ И ДЕЗАКТИВАЦИЯ
 
-const disableFormFields = (formFields, form) => {
+const disableUserFormFields = (formFields, form) => {
   formFields.forEach((element) => {
     element.disabled = true;
   });
   form.classList.add('ad-form--disabled');
 };
 
-const enableFormFields = (formFields, form) => {
+const enableUserFormFields = (formFields, form) => {
   formFields.forEach((element) => {
     element.disabled = false;
   });
   form.classList.remove('ad-form--disabled');
 };
 
-const disableForm = () => {
-  disableFormFields(formOfAdvertFields, formOfAdvert);
-  disableFormFields(filtersOfAdvertsFields, filtersOfAdverts);
+const disableUserForm = () => {
+  disableUserFormFields(formOfAdvertFields, formOfAdvert);
+  disableUserFormFields(filtersOfAdvertsFields, filtersOfAdverts);
 };
 
-const enableForm = () => {
-  enableFormFields(formOfAdvertFields, formOfAdvert);
-  enableFormFields(filtersOfAdvertsFields, filtersOfAdverts);
+const enableUserForm = () => {
+  enableUserFormFields(formOfAdvertFields, formOfAdvert);
+  enableUserFormFields(filtersOfAdvertsFields, filtersOfAdverts);
 };
 
 // ОЧИСТКА
@@ -103,7 +103,7 @@ const onCheckInSwitch = () => {
 checkInTimeField.addEventListener('change', onCheckOutSwitch);
 checkOutTimeField.addEventListener('change', onCheckInSwitch);
 
-disableForm();
+disableUserForm();
 
 
 // ОТПРАВКА ФОРМЫ
@@ -149,4 +149,4 @@ priceSlider.noUiSlider.on('update', () => {
   realtyPriceField.value = priceSlider.noUiSlider.get();
 });
 
-export { enableForm, formFieldsReset, setUserFormSubmit };
+export { enableUserForm, disableUserForm, formFieldsReset, setUserFormSubmit };
