@@ -1,4 +1,4 @@
-import { enableUserForm, disableUserForm } from './user-form.mjs';
+import { enableUserForm, disableUserForm } from './user-form.js';
 
 const inizializeMap = () => {
   const map = L.map('map-canvas')

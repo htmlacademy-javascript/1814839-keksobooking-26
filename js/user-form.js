@@ -1,5 +1,5 @@
-import { showErrorMessage, showSuccessMessage } from './util.mjs';
-import { sendData } from './api.mjs';
+import { showErrorMessage, showSuccessMessage } from './util.js';
+import { sendData } from './api.js';
 
 const formOfAdvert = document.querySelector('.ad-form');
 const formOfAdvertFields = formOfAdvert.querySelectorAll('fieldset');

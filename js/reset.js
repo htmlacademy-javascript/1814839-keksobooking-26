@@ -1,4 +1,4 @@
-import { formFieldsReset, setUserFormSubmit } from './user-form.mjs';
+import { formFieldsReset, setUserFormSubmit } from './user-form.js';
 import { resetMapItems } from './markers.mjs';
 
 const formOfAdvertResetButton = document.querySelector('.ad-form__reset');

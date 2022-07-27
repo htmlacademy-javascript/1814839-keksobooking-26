@@ -1,4 +1,4 @@
-import { createPhotoElement, createListElement } from './util.mjs';
+import { createPhotoElement, createListElement } from './util.js';
 
 const realtyCardTemplate = document.querySelector('#popupTemplate')
   .content

@@ -1,5 +1,5 @@
-import { inizializeMap } from './map.mjs';
-import { createFullDescriptionPopup } from './full-description-popups.mjs';
+import { inizializeMap } from './map.js';
+import { createFullDescriptionPopup } from './full-description-popups.js';
 
 const SIMILAR_OFFERS_COUNT = 10;
 
