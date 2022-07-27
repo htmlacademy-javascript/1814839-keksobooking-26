@@ -14,9 +14,7 @@ const getData = (onSuccess, onError) => {
     });
 };
 
-const fetchMarkers = () => {
-  return fetch('https://26.javascript.pages.academy/keksobooking/data');
-}
+const fetchMarkers = () => fetch('https://26.javascript.pages.academy/keksobooking/data');
 
 const sendData = (body, onSuccess, onError) => {
   fetch(
