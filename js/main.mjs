@@ -1,10 +1,11 @@
-import './form.mjs';
-import './map.mjs';
-import './markers.mjs';
-import './api.mjs';
-import './reset.mjs';
+import { getData, fetchMarkers } from './api.mjs';
+import { initializeMarkers, updateMarkers } from './markers.mjs';
+import { inizializeFilterForm } from './filter-form.mjs';
+import { debounce } from './util.mjs';
+import { inizializeAvatar } from './avatar.mjs';
 
-import { setUserFormSubmit } from './form.mjs';
-import { onResetButtonClick } from './reset.mjs';
+const RENDER_DELAY = 500;
 
-setUserFormSubmit(onResetButtonClick);
+getData(initializeMarkers);
+debounce(inizializeFilterForm(fetchMarkers, updateMarkers), RENDER_DELAY);
+inizializeAvatar();

@@ -1,6 +1,7 @@
-import { map } from './map.mjs';
+import { inizializeMap } from './map.mjs';
 import { createFullDescriptionPopup } from './full-description-popups.mjs';
-import { createDataLoader } from './api.mjs';
+
+const SIMILAR_OFFERS_COUNT = 10;
 
 const addressField = document.querySelector('[name = "address"]');
 
@@ -32,6 +33,9 @@ mainPinMarker.on('moveend', (evt) => {
   addressField.value = `${lat}, ${lng}`;
 });
 
+const map = inizializeMap();
+mainPinMarker.addTo(map);
+
 // ОСТАЛЬНЫЕ МАРКЕРЫ
 
 const pinIcon = L.icon({
@@ -40,29 +44,42 @@ const pinIcon = L.icon({
   iconAnchor: [20, 40],
 });
 
-mainPinMarker.addTo(map);
+let markers = [];
 
 // создает маркеры по координатам из массива
 const createMarkers = (array) => {
-  array.forEach((card) => {
-    const cardLat = card.location.lat;
-    const cardLng = card.location.lng;
+  array
+    .slice(0, SIMILAR_OFFERS_COUNT)
+    .forEach((card) => {
+      const cardLat = card.location.lat;
+      const cardLng = card.location.lng;
 
-    const pinMarker = L.marker(
-      {
-        lat: cardLat,
-        lng: cardLng,
-      },
-      {
-        icon: pinIcon,
-      });
-    pinMarker
-      .addTo(map)
-      .bindPopup(createFullDescriptionPopup(card));
-  });
+      const pinMarker = L.marker(
+        {
+          lat: cardLat,
+          lng: cardLng,
+        },
+        {
+          icon: pinIcon,
+        });
+      markers.push(pinMarker);
+      pinMarker
+        .addTo(map)
+        .bindPopup(createFullDescriptionPopup(card));
+    });
 };
 
-createDataLoader(createMarkers, console.error);
+const initializeMarkers = (dataFromBackend) => {
+  createMarkers(dataFromBackend);
+};
+
+const updateMarkers = (filteredData) => {
+  markers.forEach((marker) => {
+    marker.remove();
+  });
+  markers = [];
+  createMarkers(filteredData);
+};
 
 // возвращает в исходное пложение
 const resetMapItems = () => {
@@ -73,4 +90,4 @@ const resetMapItems = () => {
   map.closePopup();
 };
 
-export { resetMapItems };
+export { resetMapItems, initializeMarkers, updateMarkers };
