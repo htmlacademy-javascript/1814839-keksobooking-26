@@ -1,4 +1,4 @@
-import { map } from './map.mjs';
+import { inizializeMap } from './map.mjs';
 import { createFullDescriptionPopup } from './full-description-popups.mjs';
 
 const SIMILAR_OFFERS_COUNT = 10;
@@ -33,6 +33,7 @@ mainPinMarker.on('moveend', (evt) => {
   addressField.value = `${lat}, ${lng}`;
 });
 
+const map = inizializeMap();
 mainPinMarker.addTo(map);
 
 // ОСТАЛЬНЫЕ МАРКЕРЫ
