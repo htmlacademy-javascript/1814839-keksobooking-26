@@ -1,7 +1,6 @@
-import { inizializeMap } from './map.js';
+import { TOKYO_LAT, TOKYO_LNG, SIMILAR_OFFERS_COUNT } from './constants.js';
+import { initializeMap } from './map.js';
 import { createFullDescriptionPopup } from './full-description-popups.js';
-
-const SIMILAR_OFFERS_COUNT = 10;
 
 const addressField = document.querySelector('[name = "address"]');
 
@@ -15,8 +14,8 @@ const mainPinIcon = L.icon({
 
 const mainPinMarker = L.marker(
   {
-    lat: 35.652832,
-    lng: 139.839478,
+    lat: TOKYO_LAT,
+    lng: TOKYO_LNG,
   },
   {
     draggable: true,
@@ -33,7 +32,7 @@ mainPinMarker.on('moveend', (evt) => {
   addressField.value = `${lat}, ${lng}`;
 });
 
-const map = inizializeMap();
+const map = initializeMap();
 mainPinMarker.addTo(map);
 
 // ОСТАЛЬНЫЕ МАРКЕРЫ
@@ -90,4 +89,4 @@ const resetMapItems = () => {
   map.closePopup();
 };
 
-export { resetMapItems, initializeMarkers, updateMarkers };
+export { resetMapItems, initializeMarkers, updateMarkers, TOKYO_LAT, TOKYO_LNG };

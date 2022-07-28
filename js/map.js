@@ -1,13 +1,14 @@
 import { enableUserForm, disableUserForm } from './user-form.js';
+import { TOKYO_LAT, TOKYO_LNG } from './constants.js';
 
-const inizializeMap = () => {
+const initializeMap = () => {
   const map = L.map('map-canvas')
     .on('load', () => {
       enableUserForm();
     })
     .setView({
-      lat: 35.652832,
-      lng: 139.839478,
+      lat: TOKYO_LAT,
+      lng: TOKYO_LNG,
     }, 10);
 
   L.tileLayer(
@@ -19,8 +20,8 @@ const inizializeMap = () => {
   return map;
 };
 
-if (!inizializeMap) {
+if (!initializeMap) {
   disableUserForm();
 }
 
-export { inizializeMap };
+export { initializeMap };
