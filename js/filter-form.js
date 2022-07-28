@@ -1,9 +1,11 @@
+import { LOW_PRICE, HIGHT_PRICE } from './constants.js';
+
 const mapFiltersForm = document.querySelector('.map__filters');
 
-const inizializeFilterForm = (fetchData, updateData) => {
+const initializeFilterForm = (fetchData, updateData) => {
   mapFiltersForm.addEventListener('change', () => {
-    fetchData().then(async (httpresponse) => {
-      const data = await httpresponse.json();
+    fetchData().then(async (httpResponse) => {
+      const data = await httpResponse.json();
       // описывает фильтры
       let filteredData = data.filter((item) => {
         const formValue = mapFiltersForm.elements['housing-guests'].value;
@@ -13,9 +15,9 @@ const inizializeFilterForm = (fetchData, updateData) => {
         return formValue === 'any' || item.offer.type === formValue;
       }).filter((item) => {
         const formValue = mapFiltersForm.elements['housing-price'].value;
-        return formValue === 'any' || (item.offer.price < 10000 && formValue === 'low')
-          || (item.offer.price >= 50000 && formValue === 'high')
-          || (item.offer.price >= 10000 && item.offer.price < 50000 && formValue === 'middle');
+        return formValue === 'any' || (item.offer.price < LOW_PRICE && formValue === 'low')
+          || (item.offer.price >= HIGHT_PRICE && formValue === 'high')
+          || (item.offer.price >= LOW_PRICE && item.offer.price < HIGHT_PRICE && formValue === 'middle');
       }).filter((item) => {
         const formValue = mapFiltersForm.elements['housing-rooms'].value;
         return formValue === 'any' || item.offer.rooms === parseInt(formValue, 10);
@@ -32,4 +34,4 @@ const inizializeFilterForm = (fetchData, updateData) => {
   });
 };
 
-export { inizializeFilterForm };
+export { initializeFilterForm };

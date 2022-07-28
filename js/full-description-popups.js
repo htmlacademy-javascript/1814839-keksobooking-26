@@ -1,3 +1,4 @@
+import { POPUP_PHOTO_WIDTH, POPUP_PHOTO_HEIGHT } from './constants.js';
 import { createPhotoElement, createListElement } from './util.js';
 
 const realtyCardTemplate = document.querySelector('#popupTemplate')
@@ -34,15 +35,17 @@ const controlAvatarAppend = (params) => {
 
 const controlFeaturesAppend = (params) => {
   const { data, element } = params;
+  const popupFeatures = element.querySelector('.popup__features');
+
   if (data) {
     data.forEach((feature) => {
 
       const li = createListElement(['popup__feature', `popup__feature--${feature}`]);
 
-      element.querySelector('.popup__features').appendChild(li);
+      popupFeatures.appendChild(li);
     });
   } else {
-    element.querySelector('.popup__features').remove();
+    popupFeatures.remove();
   }
 };
 
@@ -55,8 +58,8 @@ const controlPhotosAppend = (params) => {
         {
           className: ['popup__photo'],
           src: photo,
-          width: 45,
-          height: 40
+          width: POPUP_PHOTO_WIDTH,
+          height: POPUP_PHOTO_HEIGHT
         }
       );
       photosFragment.append(img);
