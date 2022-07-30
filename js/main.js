@@ -4,8 +4,9 @@ import { initializeMarkers, updateMarkers } from './markers.js';
 import { initializeFilterForm } from './filter-form.js';
 import { debounce } from './util.js';
 import { initializeAvatar } from './images.js';
-import './reset.js';
+import { initializeResetForm } from './reset.js';
 
 getData(initializeMarkers);
 debounce(initializeFilterForm(fetchMarkers, updateMarkers), RENDER_DELAY);
 initializeAvatar();
+initializeResetForm();

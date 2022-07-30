@@ -89,4 +89,4 @@ const resetMapItems = () => {
   map.closePopup();
 };
 
-export { resetMapItems, initializeMarkers, updateMarkers, TOKYO_LAT, TOKYO_LNG };
+export { resetMapItems, initializeMarkers, updateMarkers };
