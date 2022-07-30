@@ -6,6 +6,7 @@ const initializeFilterForm = (fetchData, updateData) => {
   mapFiltersForm.addEventListener('change', () => {
     fetchData().then(async (httpResponse) => {
       const data = await httpResponse.json();
+
       // описывает фильтры
       let filteredData = data.filter((item) => {
         const formValue = mapFiltersForm.elements['housing-guests'].value;
@@ -34,4 +35,8 @@ const initializeFilterForm = (fetchData, updateData) => {
   });
 };
 
-export { initializeFilterForm };
+const resetFilterForm = () => {
+  mapFiltersForm.reset();
+};
+
+export { initializeFilterForm, resetFilterForm };

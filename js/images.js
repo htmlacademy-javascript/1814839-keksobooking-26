@@ -1,4 +1,4 @@
-import { FILES_TYPES } from './constants.js';
+import { FILES_TYPES, AD_FROM_REALTY_PHOTO_SRC, AD_FORM_HEADER_IMG_SRC } from './constants.js';
 
 const chooserFileAvatar = document.querySelector('[name="avatar"]');
 const previewAvatar = document.querySelector('.ad-form-header__img');
@@ -17,6 +17,11 @@ const onImgChange = (chooser, preview) => {
   }
 };
 
+const resetImages = () => {
+  previewAvatar.src = AD_FORM_HEADER_IMG_SRC;
+  previewPhoto.src = AD_FROM_REALTY_PHOTO_SRC;
+};
+
 const initializeAvatar = () => {
   chooserFileAvatar.addEventListener('change', () => {
     onImgChange(chooserFileAvatar, previewAvatar);
@@ -27,4 +32,4 @@ const initializeAvatar = () => {
   });
 };
 
-export { initializeAvatar };
+export { initializeAvatar, resetImages };
