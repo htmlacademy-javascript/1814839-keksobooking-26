@@ -41,8 +41,6 @@ const showSuccessMessage = () => {
 };
 //------------------------------------------//
 
-const getRandomNonInteger = (min, max) => (Math.random() * (max - min + 1) + min);
-
 const createPhotoElement = (params) => {
   const { className, src, width, height } = params;
   const img = document.createElement('img');
@@ -79,6 +77,6 @@ const debounce = (callback, timeoutDelay = 500) => {
 };
 
 export {
-  getRandomNonInteger, createPhotoElement, createListElement, showSuccessMessage,
+  createPhotoElement, createListElement, showSuccessMessage,
   showErrorMessage, debounce
 };
